@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClickPortugal - Maquette</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f8f8f8;
+    }
+
+    header {
+      background: #ff6f61;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .search-bar {
+      display: flex;
+      justify-content: center;
+      margin: 1rem 0;
+    }
+
+    .search-bar input {
+      width: 300px;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px 0 0 4px;
+    }
+
+    .search-bar button {
+      padding: 0.5rem 1rem;
+      border: none;
+      background: #333;
+      color: white;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+    }
+
+    .map {
+      height: 300px;
+      background: #d0e6f6;
+      margin: 1rem auto;
+      width: 90%;
+      border-radius: 8px;
+      position: relative;
+    }
+
+    .map-point {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ff6f61;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+    }
+
+    .places {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1rem;
+    }
+
+    .place-card {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      width: 250px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+
+    .place-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .place-card img {
+      width: 100%;
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+    }
+
+    .place-card h3 {
+      margin: 0.5rem 0;
+      font-size: 1.1rem;
+    }
+
+    .place-card p {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>ClickPortugal - Maquette</h1>
+  </header>
+
+  <div class="search-bar">
+    <input type="text" placeholder="Rechercher un lieu…">
+    <button>🔍</button>
+  </div>
+
+  <div class="map">
+    <!-- Points simulés sur la carte -->
+    <div class="map-point" style="top: 50px; left: 50px;" title="Braga">B</div>
+    <div class="map-point" style="top: 120px; left: 200px;" title="Porto">P</div>
+    <div class="map-point" style="top: 200px; left: 100px;" title="Vigo">V</div>
+  </div>
+
+  <div class="places">
+    <div class="place-card">
+      <img src="https://via.placeholder.com/250x150" alt="Lieu 1">
+      <h3>Braga - Sanctuaire</h3>
+      <p>Un magnifique lieu religieux avec vue panoramique et funiculaire.</p>
+    </div>
+    <div class="place-card">
+      <img src="https://via.placeholder.com/250x150" alt="Lieu 2">
+      <h3>Porto - Ribeira</h3>
+      <p>Quartier pittoresque au bord du Douro avec restaurants et caves de vin.</p>
+    </div>
+    <div class="place-card">
+      <img src="https://via.placeholder.com/250x150" alt="Lieu 3">
+      <h3>Vigo - Plage</h3>
+      <p>Plage de sable fin idéale pour se détendre et profiter du soleil.</p>
+    </div>
+  </div>
+
+</body>
+</html>
