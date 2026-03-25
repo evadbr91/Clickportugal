@@ -3,19 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ClickPortugal - Maquette</title>
+  <title>ClickPortugal - Prototype</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      background: #f8f8f8;
+      background: #f4f6f8;
+      color: #333;
     }
 
     header {
-      background: #ff6f61;
+      background: #0077b6;
       color: white;
-      padding: 1rem;
+      padding: 1.5rem;
       text-align: center;
+      font-size: 1.8rem;
+      font-weight: bold;
     }
 
     .search-bar {
@@ -26,33 +29,36 @@
 
     .search-bar input {
       width: 300px;
-      padding: 0.5rem;
+      padding: 0.6rem;
       border: 1px solid #ccc;
       border-radius: 4px 0 0 4px;
+      font-size: 1rem;
     }
 
     .search-bar button {
-      padding: 0.5rem 1rem;
+      padding: 0.6rem 1rem;
       border: none;
-      background: #333;
+      background: #023e8a;
       color: white;
       border-radius: 0 4px 4px 0;
       cursor: pointer;
+      font-size: 1rem;
     }
 
     .map {
-      height: 300px;
-      background: #d0e6f6;
+      height: 350px;
+      background: #90e0ef;
       margin: 1rem auto;
       width: 90%;
-      border-radius: 8px;
+      border-radius: 12px;
       position: relative;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
     }
 
     .map-point {
       position: absolute;
-      width: 20px;
-      height: 20px;
+      width: 28px;
+      height: 28px;
       background: #ff6f61;
       border-radius: 50%;
       cursor: pointer;
@@ -60,10 +66,16 @@
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 12px;
+      font-weight: bold;
+      font-size: 13px;
+      transition: transform 0.2s;
     }
 
-    .places {
+    .map-point:hover {
+      transform: scale(1.3);
+    }
+
+    .places, .articles {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -71,73 +83,119 @@
       margin: 1rem;
     }
 
-    .place-card {
+    .card {
       background: white;
       padding: 1rem;
-      border-radius: 8px;
-      width: 250px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      width: 260px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
       transition: transform 0.2s;
       cursor: pointer;
     }
 
-    .place-card:hover {
+    .card:hover {
       transform: translateY(-5px);
     }
 
-    .place-card img {
+    .card img {
       width: 100%;
-      border-radius: 6px;
+      border-radius: 10px;
       margin-bottom: 0.5rem;
     }
 
-    .place-card h3 {
+    .card h3 {
       margin: 0.5rem 0;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
     }
 
-    .place-card p {
+    .card p {
       font-size: 0.9rem;
       color: #555;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 2rem;
+      color: #023e8a;
     }
 
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>ClickPortugal - Maquette</h1>
-  </header>
+  <header>ClickPortugal</header>
 
   <div class="search-bar">
-    <input type="text" placeholder="Rechercher un lieu…">
-    <button>🔍</button>
+    <input type="text" id="searchInput" placeholder="Rechercher un lieu…">
+    <button onclick="filterPlaces()">🔍</button>
   </div>
 
   <div class="map">
-    <!-- Points simulés sur la carte -->
-    <div class="map-point" style="top: 50px; left: 50px;" title="Braga">B</div>
-    <div class="map-point" style="top: 120px; left: 200px;" title="Porto">P</div>
-    <div class="map-point" style="top: 200px; left: 100px;" title="Vigo">V</div>
+    <div class="map-point" style="top: 50px; left: 50px;" data-place="Braga" title="Braga">B</div>
+    <div class="map-point" style="top: 120px; left: 200px;" data-place="Porto" title="Porto">P</div>
+    <div class="map-point" style="top: 200px; left: 100px;" data-place="Vigo" title="Vigo">V</div>
   </div>
 
-  <div class="places">
-    <div class="place-card">
-      <img src="https://via.placeholder.com/250x150" alt="Lieu 1">
+  <h2>Fiches Lieux</h2>
+  <div class="places" id="placesContainer">
+    <div class="card" data-name="Braga">
+      <img src="https://via.placeholder.com/260x150" alt="Braga">
       <h3>Braga - Sanctuaire</h3>
-      <p>Un magnifique lieu religieux avec vue panoramique et funiculaire.</p>
+      <p>Magnifique lieu religieux avec vue panoramique et funiculaire.</p>
     </div>
-    <div class="place-card">
-      <img src="https://via.placeholder.com/250x150" alt="Lieu 2">
+    <div class="card" data-name="Porto">
+      <img src="https://via.placeholder.com/260x150" alt="Porto">
       <h3>Porto - Ribeira</h3>
       <p>Quartier pittoresque au bord du Douro avec restaurants et caves de vin.</p>
     </div>
-    <div class="place-card">
-      <img src="https://via.placeholder.com/250x150" alt="Lieu 3">
+    <div class="card" data-name="Vigo">
+      <img src="https://via.placeholder.com/260x150" alt="Vigo">
       <h3>Vigo - Plage</h3>
       <p>Plage de sable fin idéale pour se détendre et profiter du soleil.</p>
     </div>
   </div>
+
+  <h2>Articles</h2>
+  <div class="articles">
+    <div class="card">
+      <h3>Guide des plages du Portugal</h3>
+      <p>Découvrez les meilleures plages pour profiter du soleil et des paysages.</p>
+    </div>
+    <div class="card">
+      <h3>Top des restaurants à Porto</h3>
+      <p>Les adresses incontournables pour déguster la cuisine locale.</p>
+    </div>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const places = document.querySelectorAll('.places .card');
+    const mapPoints = document.querySelectorAll('.map-point');
+
+    function filterPlaces() {
+      const query = searchInput.value.toLowerCase();
+      places.forEach(place => {
+        if(place.dataset.name.toLowerCase().includes(query)) {
+          place.style.display = 'block';
+        } else {
+          place.style.display = 'none';
+        }
+      });
+    }
+
+    mapPoints.forEach(point => {
+      point.addEventListener('click', () => {
+        const name = point.dataset.place;
+        places.forEach(place => {
+          if(place.dataset.name === name) {
+            place.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            place.style.transform = 'scale(1.05)';
+            setTimeout(() => place.style.transform = 'scale(1)', 500);
+          }
+        });
+      });
+    });
+  </script>
 
 </body>
 </html>
