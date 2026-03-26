@@ -1,219 +1,1750 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>ClickPortugal</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClickPortugal - Guide premium du Portugal</title>
+  <meta
+    name="description"
+    content="Guide premium pour explorer, filtrer et découvrir les meilleures adresses du Portugal : hôtels, restaurants, rooftops, activités et plages."
+  />
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f8f7f5;
-      color: #1f2937;
+    :root{
+      --bg:#f6f3ee;
+      --surface:#ffffff;
+      --surface-2:#f8fafc;
+      --text:#14202b;
+      --muted:#637082;
+      --line:#e6e8ec;
+      --primary:#0f766e;
+      --primary-2:#0b5d57;
+      --accent:#e8fff8;
+      --dark:#0f1720;
+      --gold:#b38a4a;
+      --shadow:0 20px 50px rgba(15,23,32,.08);
+      --radius-xl:28px;
+      --radius-lg:22px;
+      --radius-md:16px;
+      --radius-sm:12px;
+      --max:1240px;
     }
 
-    header {
-      position: sticky;
-      top: 0;
-      background: white;
-      border-bottom: 1px solid #eee;
-      padding: 15px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(15,118,110,.06), transparent 28%),
+        radial-gradient(circle at top right, rgba(179,138,74,.08), transparent 20%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.5;
     }
 
-    nav a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: #555;
+    img{max-width:100%;display:block}
+    a{text-decoration:none;color:inherit}
+    button,input,select{font:inherit}
+    .container{width:min(var(--max), calc(100% - 32px)); margin:auto}
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      backdrop-filter: blur(14px);
+      background:rgba(246,243,238,.85);
+      border-bottom:1px solid rgba(20,32,43,.06);
     }
 
-    .hero {
-      padding: 60px 30px;
-      max-width: 1000px;
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      min-height:78px;
     }
 
-    h1 {
-      font-size: 40px;
-      margin-bottom: 20px;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:0;
     }
 
-    .search {
-      background: white;
-      padding: 15px;
-      border-radius: 20px;
-      display: flex;
-      gap: 10px;
-      margin-top: 20px;
+    .brand-badge{
+      width:46px;
+      height:46px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, var(--primary), #123b3b);
+      color:#fff;
+      font-weight:800;
+      box-shadow:var(--shadow);
     }
 
-    .search input, .search select {
-      padding: 10px;
-      border-radius: 10px;
-      border: 1px solid #ddd;
+    .brand-text small{
+      display:block;
+      color:var(--primary);
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      font-size:11px;
+      font-weight:700;
+      margin-bottom:2px;
     }
 
-    .search button {
-      background: black;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 10px;
-      cursor: pointer;
+    .brand-text strong{
+      display:block;
+      font-size:22px;
+      letter-spacing:-.03em;
     }
 
-    .categories {
-      padding: 40px 30px;
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:24px;
+      color:#324052;
+      font-size:14px;
+      font-weight:600;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 15px;
+    .nav a:hover{color:var(--primary)}
+
+    .btn{
+      border:none;
+      cursor:pointer;
+      border-radius:999px;
+      padding:13px 20px;
+      font-weight:700;
+      transition:.2s ease;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
     }
 
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 15px;
-      cursor: pointer;
-      transition: 0.2s;
+    .btn:hover{transform:translateY(-1px)}
+    .btn-primary{
+      background:var(--dark);
+      color:#fff;
+      box-shadow:var(--shadow);
+    }
+    .btn-primary:hover{background:#060b11}
+    .btn-soft{
+      background:#fff;
+      color:var(--text);
+      border:1px solid var(--line);
+    }
+    .btn-soft:hover{border-color:#cfd5dc}
+    .btn-green{
+      background:var(--primary);
+      color:#fff;
+    }
+    .btn-green:hover{background:var(--primary-2)}
+
+    .hero{
+      padding:42px 0 24px;
     }
 
-    .card:hover {
-      transform: translateY(-3px);
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:28px;
+      align-items:stretch;
     }
 
-    .map {
-      margin: 40px 30px;
-      height: 300px;
-      background: linear-gradient(#e6f7f1, #f5f5f5);
-      border-radius: 20px;
-      position: relative;
+    .hero-left,
+    .hero-right,
+    .panel{
+      background:rgba(255,255,255,.86);
+      border:1px solid rgba(20,32,43,.06);
+      box-shadow:var(--shadow);
+      border-radius:var(--radius-xl);
     }
 
-    .pin {
-      position: absolute;
-      background: green;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      cursor: pointer;
+    .hero-left{
+      padding:34px;
+      position:relative;
+      overflow:hidden;
     }
 
-    .popup {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      background: white;
-      padding: 15px;
-      border-radius: 15px;
-      display: none;
-      max-width: 250px;
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:var(--accent);
+      color:var(--primary-2);
+      border:1px solid rgba(15,118,110,.14);
+      padding:8px 14px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.1em;
+      text-transform:uppercase;
     }
 
-    .places {
-      padding: 40px 30px;
+    h1{
+      font-size:clamp(38px, 5vw, 72px);
+      line-height:.98;
+      margin:18px 0 16px;
+      letter-spacing:-.05em;
+      max-width:820px;
     }
 
-    .place-card {
-      background: white;
-      padding: 20px;
-      border-radius: 15px;
-      margin-bottom: 15px;
+    .hero-copy{
+      color:var(--muted);
+      font-size:18px;
+      max-width:760px;
+      margin-bottom:26px;
     }
 
+    .search-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:14px;
+    }
+
+    .search-grid{
+      display:grid;
+      grid-template-columns:1.6fr 1fr 1fr auto;
+      gap:12px;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+
+    .field label{
+      font-size:12px;
+      color:var(--muted);
+      font-weight:700;
+      padding-left:4px;
+    }
+
+    .field input, .field select{
+      height:52px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:0 16px;
+      background:#fff;
+      color:var(--text);
+      outline:none;
+    }
+
+    .field input:focus, .field select:focus{
+      border-color:var(--primary);
+      box-shadow:0 0 0 4px rgba(15,118,110,.08);
+    }
+
+    .quick-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 14px;
+      border-radius:999px;
+      background:#f4f6f8;
+      color:#304152;
+      font-size:13px;
+      font-weight:700;
+      border:1px solid transparent;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+    .tag:hover,.tag.active{
+      background:#eaf8f6;
+      color:var(--primary-2);
+      border-color:rgba(15,118,110,.18);
+    }
+
+    .hero-stats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      margin-top:24px;
+    }
+
+    .stat{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px;
+    }
+
+    .stat strong{
+      display:block;
+      font-size:24px;
+      letter-spacing:-.04em;
+    }
+
+    .stat span{
+      display:block;
+      font-size:13px;
+      color:var(--muted);
+      margin-top:4px;
+    }
+
+    .hero-right{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .map-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 8px 0;
+    }
+
+    .map-head small{
+      display:block;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .map-head h2{
+      margin:6px 0 0;
+      font-size:28px;
+      letter-spacing:-.04em;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:#edfdf7;
+      border:1px solid rgba(15,118,110,.16);
+      color:var(--primary);
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      white-space:nowrap;
+    }
+
+    .map-box{
+      position:relative;
+      min-height:520px;
+      border-radius:24px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background:
+        radial-gradient(circle at 10% 20%, rgba(15,118,110,.12), transparent 20%),
+        radial-gradient(circle at 80% 30%, rgba(179,138,74,.12), transparent 16%),
+        linear-gradient(180deg, #f5fbfa, #eff4f9);
+    }
+
+    .map-gridlines::before,
+    .map-gridlines::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(rgba(20,32,43,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(20,32,43,.05) 1px, transparent 1px);
+      background-size:52px 52px;
+      mask-image:linear-gradient(to bottom, rgba(0,0,0,.9), rgba(0,0,0,.3));
+      pointer-events:none;
+    }
+
+    .zone-label{
+      position:absolute;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.9);
+      border:1px solid rgba(20,32,43,.08);
+      font-size:12px;
+      font-weight:800;
+      color:#29404d;
+      box-shadow:0 10px 25px rgba(15,23,32,.06);
+    }
+
+    .map-pin{
+      position:absolute;
+      width:22px;
+      height:22px;
+      border:none;
+      border-radius:50%;
+      cursor:pointer;
+      background:var(--primary);
+      box-shadow:0 0 0 10px rgba(15,118,110,.12);
+      transition:.2s ease;
+    }
+    .map-pin:hover{transform:scale(1.08)}
+    .map-pin::after{
+      content:"";
+      position:absolute;
+      inset:5px;
+      border-radius:50%;
+      background:#fff;
+    }
+
+    .floating-card{
+      position:absolute;
+      left:18px;
+      right:18px;
+      bottom:18px;
+      background:rgba(255,255,255,.95);
+      backdrop-filter: blur(10px);
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:18px;
+      box-shadow:var(--shadow);
+    }
+
+    .mini-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-bottom:12px;
+    }
+
+    .mini-meta span{
+      background:#f4f7f9;
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:12px;
+      font-weight:700;
+      color:#425369;
+    }
+
+    .floating-card h3{
+      margin:0 0 6px;
+      font-size:24px;
+      letter-spacing:-.03em;
+    }
+
+    .floating-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .floating-actions{
+      display:flex;
+      gap:10px;
+      margin-top:14px;
+      flex-wrap:wrap;
+    }
+
+    section{
+      padding:26px 0;
+    }
+
+    .section-head{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:18px;
+    }
+
+    .section-head small{
+      display:block;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font-size:11px;
+      font-weight:800;
+      margin-bottom:8px;
+    }
+
+    .section-head h2{
+      margin:0;
+      font-size:clamp(28px, 4vw, 44px);
+      line-height:1.02;
+      letter-spacing:-.05em;
+      max-width:760px;
+    }
+
+    .section-head p{
+      margin:0;
+      max-width:520px;
+      color:var(--muted);
+    }
+
+    .city-tabs{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+
+    .tab{
+      padding:10px 16px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      color:#34465a;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .tab.active{
+      background:var(--dark);
+      color:#fff;
+      border-color:var(--dark);
+    }
+
+    .category-grid{
+      display:grid;
+      grid-template-columns:repeat(5, 1fr);
+      gap:16px;
+    }
+
+    .category-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:24px;
+      box-shadow:var(--shadow);
+      transition:.22s ease;
+      position:relative;
+      overflow:hidden;
+      cursor:pointer;
+    }
+
+    .category-card:hover{
+      transform:translateY(-4px);
+      border-color:#d7dce2;
+    }
+
+    .category-icon{
+      font-size:32px;
+      margin-bottom:18px;
+    }
+
+    .category-card h3{
+      margin:0 0 6px;
+      font-size:24px;
+      letter-spacing:-.04em;
+    }
+
+    .category-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      min-height:42px;
+    }
+
+    .category-link{
+      margin-top:18px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      color:var(--primary);
+      font-weight:800;
+      font-size:14px;
+    }
+
+    .feature-band{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:16px;
+      margin-top:16px;
+    }
+
+    .band-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:26px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .editorial-card{
+      padding:28px;
+      background:linear-gradient(135deg, #101c26, #122c30 60%, #19423d);
+      color:#fff;
+      border:none;
+    }
+
+    .editorial-card p{
+      color:rgba(255,255,255,.75);
+      margin-top:0;
+    }
+
+    .editorial-list{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:22px;
+    }
+
+    .editorial-item{
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;
+      padding:16px;
+    }
+
+    .editorial-item small{
+      display:block;
+      color:rgba(255,255,255,.6);
+      margin-bottom:8px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .business-card{
+      padding:28px;
+    }
+
+    .business-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .business-item{
+      background:#f7f8fa;
+      border:1px solid #edf0f3;
+      border-radius:18px;
+      padding:18px;
+    }
+
+    .business-item strong{
+      display:block;
+      font-size:17px;
+      margin-bottom:6px;
+      letter-spacing:-.02em;
+    }
+
+    .business-item span{
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .highlight-box{
+      margin-top:16px;
+      border:1px solid rgba(15,118,110,.18);
+      background:#effcf8;
+      border-radius:18px;
+      padding:18px;
+      color:#0f3b39;
+      font-weight:600;
+    }
+
+    .listing-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+    }
+
+    .listing-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:26px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      transition:.22s ease;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .listing-card.hidden{display:none}
+
+    .listing-card:hover{transform:translateY(-4px)}
+    .listing-visual{
+      aspect-ratio:16/10;
+      background:
+        linear-gradient(135deg, rgba(15,118,110,.15), rgba(179,138,74,.18)),
+        linear-gradient(180deg, #dfe9ee, #edf2f5);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .listing-visual::before{
+      content:"";
+      position:absolute;
+      inset:16px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.55);
+      background:linear-gradient(180deg, rgba(255,255,255,.18), transparent);
+    }
+
+    .listing-content{
+      padding:22px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      flex:1;
+    }
+
+    .listing-top{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:flex-start;
+    }
+
+    .listing-city{
+      display:inline-flex;
+      background:#f4f7f9;
+      color:#425369;
+      border-radius:999px;
+      padding:7px 10px;
+      font-size:11px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.1em;
+    }
+
+    .price{
+      color:#243446;
+      font-weight:800;
+      white-space:nowrap;
+    }
+
+    .listing-card h3{
+      margin:0;
+      font-size:26px;
+      letter-spacing:-.04em;
+      line-height:1.05;
+    }
+
+    .listing-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .listing-meta span{
+      background:#f8fafb;
+      border:1px solid #ecf0f3;
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:12px;
+      color:#4c5d72;
+      font-weight:700;
+    }
+
+    .listing-desc{
+      color:var(--muted);
+      font-size:14px;
+      margin:0;
+      flex:1;
+    }
+
+    .listing-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .seo-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+    }
+
+    .seo-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:22px;
+      box-shadow:var(--shadow);
+    }
+
+    .seo-card small{
+      display:block;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      font-size:11px;
+      font-weight:800;
+      margin-bottom:10px;
+    }
+
+    .seo-card h3{
+      margin:0 0 10px;
+      font-size:22px;
+      line-height:1.05;
+      letter-spacing:-.04em;
+    }
+
+    .seo-card p{
+      margin:0 0 16px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .roadmap{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+    }
+
+    .roadmap-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:24px;
+      box-shadow:var(--shadow);
+      position:relative;
+    }
+
+    .roadmap-number{
+      width:42px;
+      height:42px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      background:#101c26;
+      color:#fff;
+      font-weight:800;
+      margin-bottom:16px;
+    }
+
+    .roadmap-card h3{
+      margin:0 0 10px;
+      font-size:24px;
+      letter-spacing:-.04em;
+    }
+
+    .roadmap-card ul{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted);
+    }
+
+    .roadmap-card li + li{margin-top:8px}
+
+    .footer-cta{
+      background:linear-gradient(135deg, #0f1820, #143238 65%, #184742);
+      color:#fff;
+      border-radius:30px;
+      padding:34px;
+      box-shadow:var(--shadow);
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:20px;
+      align-items:center;
+    }
+
+    .footer-cta h2{
+      margin:0 0 12px;
+      font-size:clamp(28px, 4vw, 48px);
+      line-height:1.02;
+      letter-spacing:-.05em;
+    }
+
+    .footer-cta p{
+      margin:0;
+      color:rgba(255,255,255,.72);
+      max-width:680px;
+    }
+
+    .cta-actions{
+      display:flex;
+      justify-content:flex-end;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .footer{
+      padding:24px 0 42px;
+      color:#546477;
+      font-size:14px;
+    }
+
+    .footer-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .modal{
+      position:fixed;
+      inset:0;
+      z-index:2000;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      background:rgba(7,12,16,.55);
+      backdrop-filter: blur(8px);
+    }
+
+    .modal.open{display:flex}
+
+    .modal-card{
+      width:min(920px, 100%);
+      background:#fff;
+      border-radius:28px;
+      box-shadow:0 30px 80px rgba(0,0,0,.25);
+      overflow:hidden;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+    }
+
+    .modal-visual{
+      min-height:420px;
+      background:
+        linear-gradient(135deg, rgba(15,118,110,.2), rgba(179,138,74,.22)),
+        linear-gradient(180deg, #e6edf0, #f4f6f8);
+    }
+
+    .modal-body{
+      padding:28px;
+      position:relative;
+    }
+
+    .close{
+      position:absolute;
+      top:18px;
+      right:18px;
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      border:1px solid var(--line);
+      background:#fff;
+      cursor:pointer;
+      font-size:18px;
+    }
+
+    .modal-body h3{
+      margin:22px 0 10px;
+      font-size:34px;
+      letter-spacing:-.05em;
+      line-height:1;
+      padding-right:40px;
+    }
+
+    .modal-body p{
+      color:var(--muted);
+      margin:0 0 14px;
+    }
+
+    .detail-list{
+      display:grid;
+      gap:10px;
+      margin:18px 0 22px;
+    }
+
+    .detail-item{
+      background:#f7f8fa;
+      border:1px solid #ecf0f3;
+      border-radius:16px;
+      padding:12px 14px;
+      font-size:14px;
+    }
+
+    .detail-item strong{display:block;color:#14202b;margin-bottom:4px}
+
+    .empty-state{
+      background:#fff;
+      border:1px dashed #d7dde4;
+      border-radius:24px;
+      padding:28px;
+      text-align:center;
+      color:var(--muted);
+      display:none;
+      box-shadow:var(--shadow);
+    }
+
+    @media (max-width: 1120px){
+      .hero-grid,
+      .feature-band,
+      .footer-cta{
+        grid-template-columns:1fr;
+      }
+      .category-grid{grid-template-columns:repeat(3,1fr)}
+      .listing-grid{grid-template-columns:repeat(2,1fr)}
+      .seo-grid{grid-template-columns:repeat(2,1fr)}
+      .roadmap{grid-template-columns:1fr}
+      .hero-stats{grid-template-columns:repeat(2,1fr)}
+    }
+
+    @media (max-width: 880px){
+      .nav{display:none}
+      .search-grid{grid-template-columns:1fr}
+      .category-grid,
+      .listing-grid,
+      .seo-grid,
+      .business-grid,
+      .editorial-list{
+        grid-template-columns:1fr;
+      }
+      .modal-card{grid-template-columns:1fr}
+      .modal-visual{min-height:240px}
+      .hero-left,.hero-right,.panel{padding:20px}
+      .map-box{min-height:430px}
+      .section-head{flex-direction:column;align-items:flex-start}
+    }
+
+    @media (max-width: 560px){
+      .topbar-inner{min-height:70px}
+      .hero{padding-top:24px}
+      .hero-left{padding:20px}
+      .hero-stats{grid-template-columns:1fr 1fr}
+      .floating-card{left:12px;right:12px;bottom:12px;padding:14px}
+      .category-grid{grid-template-columns:1fr 1fr}
+      .footer-cta{padding:24px}
+      .brand-text strong{font-size:19px}
+      h1{font-size:40px}
+    }
   </style>
 </head>
-
 <body>
 
-<header>
-  <strong>ClickPortugal</strong>
-  <nav>
-    <a href="#categories">Catégories</a>
-    <a href="#map">Carte</a>
-    <a href="#places">Explorer</a>
-  </nav>
-</header>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="#" class="brand">
+        <div class="brand-badge">CP</div>
+        <div class="brand-text">
+          <small>Guide digital premium</small>
+          <strong>ClickPortugal</strong>
+        </div>
+      </a>
 
-<section class="hero">
-  <h1>Le guide premium du Portugal</h1>
-  <p>Découvre les meilleures adresses : hôtels, rooftops, plages et activités.</p>
+      <nav class="nav">
+        <a href="#categories">Catégories</a>
+        <a href="#destinations">Destinations</a>
+        <a href="#explorer">Explorer</a>
+        <a href="#guides">Guides</a>
+        <a href="#roadmap">Concept</a>
+      </nav>
 
-  <div class="search">
-    <input placeholder="Rechercher..." id="searchInput">
-    <select id="categorySelect">
-      <option value="">Catégorie</option>
-      <option>Hôtels</option>
-      <option>Restaurants</option>
-      <option>Rooftops</option>
-      <option>Activités</option>
-      <option>Plages</option>
-    </select>
-    <select id="zoneSelect">
-      <option value="">Zone</option>
-      <option>Lisbonne</option>
-      <option>Porto</option>
-      <option>Algarve</option>
-    </select>
-    <button onclick="search()">Explorer</button>
+      <button class="btn btn-primary" onclick="scrollToSection('explorer')">Voir les adresses</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-left">
+          <div class="eyebrow">France - V1 - Lisbonne - Porto - Algarve</div>
+          <h1>Le guide premium pour explorer, filtrer et découvrir les meilleures adresses du Portugal.</h1>
+          <p class="hero-copy">
+            ClickPortugal mélange recherche, carte, fiches lieux et contenus éditoriaux pour transformer
+            l’inspiration en découverte, puis en conversion. Une approche plus élégante, plus utile et plus rentable
+            qu’un simple blog voyage.
+          </p>
+
+          <div class="search-card">
+            <div class="search-grid">
+              <div class="field">
+                <label for="searchInput">Recherche</label>
+                <input id="searchInput" type="text" placeholder="Rooftop, hôtel, plage, activité, quartier..." />
+              </div>
+
+              <div class="field">
+                <label for="categorySelect">Catégorie</label>
+                <select id="categorySelect">
+                  <option value="">Toutes</option>
+                  <option value="Hôtels">Hôtels</option>
+                  <option value="Restaurants">Restaurants</option>
+                  <option value="Rooftops">Rooftops</option>
+                  <option value="Activités">Activités</option>
+                  <option value="Plages">Plages</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="citySelect">Destination</label>
+                <select id="citySelect">
+                  <option value="">Toutes</option>
+                  <option value="Lisbonne">Lisbonne</option>
+                  <option value="Porto">Porto</option>
+                  <option value="Algarve">Algarve</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label>&nbsp;</label>
+                <button class="btn btn-green" onclick="applyFilters()">Explorer</button>
+              </div>
+            </div>
+
+            <div class="quick-tags">
+              <button class="tag" onclick="quickSearch('Rooftops','Lisbonne')">🍸 Rooftops Lisbonne</button>
+              <button class="tag" onclick="quickSearch('Hôtels','Porto')">🏨 Hôtels Porto</button>
+              <button class="tag" onclick="quickSearch('Plages','Algarve')">🏖️ Plages Algarve</button>
+              <button class="tag" onclick="quickSearch('Activités','Lisbonne')">⛵ Activités Lisbonne</button>
+            </div>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat"><strong>5</strong><span>catégories de départ</span></div>
+            <div class="stat"><strong>3</strong><span>zones prioritaires</span></div>
+            <div class="stat"><strong>30-50</strong><span>fiches lieux visées</span></div>
+            <div class="stat"><strong>15-20</strong><span>articles forts</span></div>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="map-head">
+            <div>
+              <small>Différenciateur UX</small>
+              <h2>Carte interactive + fiche lieu</h2>
+            </div>
+            <div class="pill">Affiliation prête dès la V1</div>
+          </div>
+
+          <div class="map-box map-gridlines" id="destinations">
+            <div class="zone-label" style="top: 20%; left: 18%;">Porto</div>
+            <div class="zone-label" style="top: 42%; left: 30%;">Lisbonne</div>
+            <div class="zone-label" style="top: 70%; left: 57%;">Algarve</div>
+
+            <button class="map-pin" style="top: 29%; left: 34%;" onclick="openPlaceById(3)"></button>
+            <button class="map-pin" style="top: 44%; left: 28%;" onclick="openPlaceById(1)"></button>
+            <button class="map-pin" style="top: 48%; left: 33%;" onclick="openPlaceById(2)"></button>
+            <button class="map-pin" style="top: 67%; left: 59%;" onclick="openPlaceById(5)"></button>
+            <button class="map-pin" style="top: 72%; left: 66%;" onclick="openPlaceById(6)"></button>
+
+            <div class="floating-card" id="floatingCard">
+              <div class="mini-meta">
+                <span>Lisbonne</span>
+                <span>Rooftop</span>
+                <span>€€€</span>
+                <span>Idéal sunset</span>
+              </div>
+              <h3>Seen Sky Bar</h3>
+              <p>
+                Vue panoramique, ambiance premium, cocktails, belle fiche éditoriale et action claire vers la réservation.
+              </p>
+              <div class="floating-actions">
+                <button class="btn btn-primary" onclick="openPlaceById(1)">Voir la fiche</button>
+                <button class="btn btn-soft" onclick="scrollToSection('explorer')">Explorer les lieux</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="categories">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <small>Architecture produit V1</small>
+            <h2>5 catégories maximum pour une base simple, lisible et crédible.</h2>
+          </div>
+          <p>
+            Le site doit rester clair au lancement, tout en étant assez fort pour soutenir la découverte,
+            le SEO, la navigation interne et la monétisation.
+          </p>
+        </div>
+
+        <div class="category-grid">
+          <article class="category-card" onclick="filterByCategory('Hôtels')">
+            <div class="category-icon">🏨</div>
+            <h3>Hôtels</h3>
+            <p>Boutique hôtels, design stays, adresses premium, quartiers où dormir.</p>
+            <span class="category-link">Explorer →</span>
+          </article>
+
+          <article class="category-card" onclick="filterByCategory('Restaurants')">
+            <div class="category-icon">🍽️</div>
+            <h3>Restaurants</h3>
+            <p>Tables signature, bonnes adresses locales, spots élégants et sélections utiles.</p>
+            <span class="category-link">Explorer →</span>
+          </article>
+
+          <article class="category-card" onclick="filterByCategory('Rooftops')">
+            <div class="category-icon">🍸</div>
+            <h3>Rooftops</h3>
+            <p>Les meilleurs spots coucher de soleil, cocktails et vues iconiques.</p>
+            <span class="category-link">Explorer →</span>
+          </article>
+
+          <article class="category-card" onclick="filterByCategory('Activités')">
+            <div class="category-icon">⛵</div>
+            <h3>Activités</h3>
+            <p>Excursions, transferts, expériences et réservations monétisables dès la V1.</p>
+            <span class="category-link">Explorer →</span>
+          </article>
+
+          <article class="category-card" onclick="filterByCategory('Plages')">
+            <div class="category-icon">🏖️</div>
+            <h3>Plages</h3>
+            <p>Spots iconiques, criques premium, plages accessibles et sélections régionales.</p>
+            <span class="category-link">Explorer →</span>
+          </article>
+        </div>
+
+        <div class="feature-band">
+          <div class="band-card editorial-card">
+            <small style="display:block; letter-spacing:.14em; text-transform:uppercase; font-size:11px; font-weight:800; color:rgba(255,255,255,.62);">Positionnement éditorial</small>
+            <h2 style="margin:8px 0 12px; font-size:40px; line-height:1.02; letter-spacing:-.05em;">
+              Un média éditorial, un moteur de découverte et une plateforme de bonnes adresses.
+            </h2>
+            <p>
+              Le design doit soutenir les contenus à forte valeur ajoutée, le maillage SEO, la recherche,
+              la carte, les lieux similaires et les intentions de réservation, sans jamais ressembler à un blog générique.
+            </p>
+
+            <div class="editorial-list">
+              <div class="editorial-item">
+                <small>Guide</small>
+                Les meilleurs rooftops de Lisbonne
+              </div>
+              <div class="editorial-item">
+                <small>Comparatif</small>
+                Où dormir à Porto : 7 quartiers à comparer
+              </div>
+              <div class="editorial-item">
+                <small>Sélection</small>
+                Les plus belles plages de l’Algarve
+              </div>
+              <div class="editorial-item">
+                <small>Itinéraire</small>
+                Portugal premium : 4 jours entre city break et mer
+              </div>
+            </div>
+          </div>
+
+          <div class="band-card business-card">
+            <small style="display:block; letter-spacing:.14em; text-transform:uppercase; font-size:11px; font-weight:800; color:var(--muted);">Business model</small>
+            <h2 style="margin:8px 0 0; font-size:38px; line-height:1.02; letter-spacing:-.05em;">Pensé comme un produit rentable, pas comme une accumulation de pages.</h2>
+
+            <div class="business-grid">
+              <div class="business-item">
+                <strong>Affiliation activités</strong>
+                <span>Excursions, billets, transferts, expériences. Monétisation prioritaire dès la V1.</span>
+              </div>
+              <div class="business-item">
+                <strong>Affiliation travel</strong>
+                <span>Hôtels, voiture, services voyage et comparateurs après validation.</span>
+              </div>
+              <div class="business-item">
+                <strong>Contenus sponsorisés</strong>
+                <span>Mises en avant premium une fois la crédibilité installée.</span>
+              </div>
+              <div class="business-item">
+                <strong>Listings premium</strong>
+                <span>Visibilité renforcée pour établissements partenaires et adresses phares.</span>
+              </div>
+            </div>
+
+            <div class="highlight-box">
+              Chaque bloc doit améliorer la compréhension du site, l’expérience utilisateur et la capacité à générer du revenu.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="explorer">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <small>Explorer les lieux</small>
+            <h2>Des fiches standardisées qui inspirent, rassurent et convertissent.</h2>
+          </div>
+          <p>
+            Chaque fiche met en avant : nom, ville, quartier, GPS, gamme de prix, pour qui, pourquoi on aime,
+            conseils utiles, lieux similaires et action de réservation.
+          </p>
+        </div>
+
+        <div class="city-tabs">
+          <button class="tab active" onclick="filterByCity('')">Toutes</button>
+          <button class="tab" onclick="filterByCity('Lisbonne')">Lisbonne</button>
+          <button class="tab" onclick="filterByCity('Porto')">Porto</button>
+          <button class="tab" onclick="filterByCity('Algarve')">Algarve</button>
+        </div>
+
+        <div class="listing-grid" id="listingGrid"></div>
+
+        <div class="empty-state" id="emptyState">
+          Aucun lieu ne correspond à ce filtre. Essaie une autre combinaison de recherche, de catégorie ou de destination.
+        </div>
+      </div>
+    </section>
+
+    <section id="guides">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <small>Guides à forte valeur ajoutée</small>
+            <h2>Le contenu éditorial doit nourrir le SEO, la navigation et la conversion.</h2>
+          </div>
+          <p>
+            Articles utiles, comparatifs, sélections, itinéraires et guides pratiques pour capter les intentions concrètes
+            et faire circuler naturellement l’utilisateur entre articles, catégories, villes et fiches lieux.
+          </p>
+        </div>
+
+        <div class="seo-grid">
+          <article class="seo-card">
+            <small>Rooftops</small>
+            <h3>Les meilleurs rooftops de Lisbonne</h3>
+            <p>Page éditoriale forte avec lieux sélectionnés, carte, filtres et CTA réservation.</p>
+            <button class="btn btn-soft" onclick="alert('Maquette article SEO : meilleurs rooftops de Lisbonne')">Voir l’article</button>
+          </article>
+
+          <article class="seo-card">
+            <small>Hôtels</small>
+            <h3>Où dormir à Porto : les meilleurs quartiers</h3>
+            <p>Comparatif utile pour capter l’intention, mailler les hôtels et rassurer avant conversion.</p>
+            <button class="btn btn-soft" onclick="alert('Maquette article SEO : où dormir à Porto')">Voir l’article</button>
+          </article>
+
+          <article class="seo-card">
+            <small>Plages</small>
+            <h3>Les plus belles plages de l’Algarve</h3>
+            <p>Article inspiration + praticité + sélection de lieux similaires et conseils d’accès.</p>
+            <button class="btn btn-soft" onclick="alert('Maquette article SEO : plages Algarve')">Voir l’article</button>
+          </article>
+
+          <article class="seo-card">
+            <small>Itinéraire</small>
+            <h3>Portugal premium : city break, mer et expériences</h3>
+            <p>Format éditorial parfait pour relier activités, hôtels et destinations phares.</p>
+            <button class="btn btn-soft" onclick="alert('Maquette article SEO : itinéraire premium')">Voir l’article</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <small>Feuille de route</small>
+            <h2>Une V1 crédible maintenant, puis validation, puis accélération.</h2>
+          </div>
+          <p>
+            Le projet doit grandir avec discipline : mesurer, améliorer, densifier, puis seulement élargir.
+          </p>
+        </div>
+
+        <div class="roadmap">
+          <article class="roadmap-card">
+            <div class="roadmap-number">1</div>
+            <h3>V1 simple, belle et crédible</h3>
+            <ul>
+              <li>Une seule langue : français</li>
+              <li>3 zones prioritaires : Lisbonne, Porto, Algarve</li>
+              <li>5 catégories maximum</li>
+              <li>30 à 50 fiches lieux</li>
+              <li>15 à 20 articles forts</li>
+            </ul>
+          </article>
+
+          <article class="roadmap-card">
+            <div class="roadmap-number">2</div>
+            <h3>Validation du modèle</h3>
+            <ul>
+              <li>Suivre les recherches, clics et consultations</li>
+              <li>Améliorer les pages les plus prometteuses</li>
+              <li>Densifier les zones qui convertissent</li>
+              <li>Renforcer le maillage interne</li>
+              <li>Fluidifier la monétisation</li>
+            </ul>
+          </article>
+
+          <article class="roadmap-card">
+            <div class="roadmap-number">3</div>
+            <h3>Accélération</h3>
+            <ul>
+              <li>Devenir une référence francophone sur le Portugal</li>
+              <li>Ouvrir de nouvelles zones et catégories</li>
+              <li>Lancer sponsorings et visibilité pro</li>
+              <li>Préparer d’autres langues</li>
+              <li>Étendre le modèle à d’autres destinations</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="footer-cta">
+          <div>
+            <h2>Une maquette pensée pour convaincre un client, pas juste “faire joli”.</h2>
+            <p>
+              Recherche, carte, catégories, fiches, SEO, conversion, affiliation, zones prioritaires,
+              éditorial premium et structure produit cohérente : tout est aligné avec le dossier de présentation.
+            </p>
+          </div>
+          <div class="cta-actions">
+            <button class="btn btn-primary" onclick="scrollToSection('explorer')">Voir les lieux</button>
+            <button class="btn btn-soft" onclick="scrollToSection('guides')">Voir les guides</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div><strong>ClickPortugal</strong> - Guide premium du Portugal</div>
+      <div>V1 maquette homepage - Lisbonne, Porto, Algarve - FR</div>
+    </div>
+  </footer>
+
+  <div class="modal" id="placeModal" onclick="closeModal(event)">
+    <div class="modal-card">
+      <div class="modal-visual"></div>
+      <div class="modal-body">
+        <button class="close" onclick="forceCloseModal()">×</button>
+        <div class="mini-meta" id="modalMeta"></div>
+        <h3 id="modalTitle">Lieu</h3>
+        <p id="modalDesc"></p>
+
+        <div class="detail-list">
+          <div class="detail-item">
+            <strong>Pourquoi on aime</strong>
+            <span id="modalLove"></span>
+          </div>
+          <div class="detail-item">
+            <strong>Pour qui</strong>
+            <span id="modalFor"></span>
+          </div>
+          <div class="detail-item">
+            <strong>Infos pratiques</strong>
+            <span id="modalInfo"></span>
+          </div>
+          <div class="detail-item">
+            <strong>Lien utile / action</strong>
+            <span id="modalAction"></span>
+          </div>
+        </div>
+
+        <div class="floating-actions">
+          <button class="btn btn-primary" onclick="alert('CTA réservation / affiliation')">Réserver</button>
+          <button class="btn btn-soft" onclick="alert('CTA lieux similaires')">Voir les lieux similaires</button>
+        </div>
+      </div>
+    </div>
   </div>
-</section>
 
-<section id="categories" class="categories">
-  <h2>Catégories</h2>
-  <div class="grid">
-    <div class="card">🏨 Hôtels</div>
-    <div class="card">🍽️ Restaurants</div>
-    <div class="card">🍸 Rooftops</div>
-    <div class="card">⛵ Activités</div>
-    <div class="card">🏖️ Plages</div>
-  </div>
-</section>
+  <script>
+    const places = [
+      {
+        id: 1,
+        title: "Seen Sky Bar",
+        city: "Lisbonne",
+        category: "Rooftops",
+        price: "€€€",
+        district: "Avenida da Liberdade",
+        tag: "Vue panoramique",
+        description: "Rooftop premium avec ambiance chic, vue sur Lisbonne et vraie promesse sunset.",
+        love: "L’atmosphère, la vue, le positionnement premium et le potentiel conversion réservation.",
+        forWho: "Couples, city break, amateurs de rooftops, week-end premium.",
+        info: "Adresse centrale - Réservation conseillée - Excellent en fin de journée.",
+        action: "Réserver une table / découvrir les rooftops similaires.",
+        badge: "Idéal sunset"
+      },
+      {
+        id: 2,
+        title: "Palácio Chiado",
+        city: "Lisbonne",
+        category: "Restaurants",
+        price: "€€€",
+        district: "Chiado",
+        tag: "Adresse iconique",
+        description: "Restaurant élégant dans un lieu remarquable, parfait pour une sélection éditoriale forte.",
+        love: "Le lieu, la mise en scène, la valeur éditoriale et le potentiel partenaire.",
+        forWho: "Dîners élégants, voyageurs premium, adresses signature.",
+        info: "Quartier central - Très bon pour enrichir les contenus city guide.",
+        action: "Voir la fiche / réserver / lire la sélection restaurants Lisbonne.",
+        badge: "Sélection premium"
+      },
+      {
+        id: 3,
+        title: "Torel Avantgarde",
+        city: "Porto",
+        category: "Hôtels",
+        price: "€€€€",
+        district: "Miragaia",
+        tag: "Boutique hôtel",
+        description: "Hôtel design avec vue, spa et très fort potentiel affiliation travel.",
+        love: "Le niveau de standing, l’esthétique du lieu et la valeur transactionnelle.",
+        forWho: "Séjours haut de gamme, couples, escapades longues.",
+        info: "Belle adresse à mettre en avant dans “où dormir à Porto”.",
+        action: "Voir les chambres / comparer avec d’autres hôtels Porto.",
+        badge: "Affiliation hotel"
+      },
+      {
+        id: 4,
+        title: "The Yeatman",
+        city: "Porto",
+        category: "Hôtels",
+        price: "€€€€",
+        district: "Vila Nova de Gaia",
+        tag: "Luxe & panorama",
+        description: "Adresse emblématique avec vue sur Porto, idéale pour renforcer la crédibilité premium.",
+        love: "Le prestige, la vue et le positionnement très haut de gamme.",
+        forWho: "Voyages premium, anniversaires, séjours d’exception.",
+        info: "Très bon candidat pour fiches fortes et comparatifs quartiers/hôtels.",
+        action: "Réserver / comparer / lire le guide Porto.",
+        badge: "Luxe iconique"
+      },
+      {
+        id: 5,
+        title: "Praia da Marinha",
+        city: "Algarve",
+        category: "Plages",
+        price: "Gratuit",
+        district: "Lagoa",
+        tag: "Incontournable",
+        description: "Plage emblématique de l’Algarve, parfaite pour contenu SEO fort et sélection visuelle.",
+        love: "Le décor, l’impact visuel et le pouvoir d’attraction dans les recherches.",
+        forWho: "Vacances mer, road trips, lecteurs en phase inspiration.",
+        info: "Mieux en matinée - utile de prévoir accès, parking et conseils sur place.",
+        action: "Voir la fiche / découvrir les plus belles plages de l’Algarve.",
+        badge: "Spot iconique"
+      },
+      {
+        id: 6,
+        title: "Benagil Boat Experience",
+        city: "Algarve",
+        category: "Activités",
+        price: "€€",
+        district: "Benagil",
+        tag: "Réservation directe",
+        description: "Excursion monétisable idéale pour lancer l’affiliation activités dès la V1.",
+        love: "Le potentiel de commission, l’intention forte et la clarté du CTA.",
+        forWho: "Voyageurs actifs, couples, familles, excursion journée.",
+        info: "Bonne fiche pour lier plage + activité + article pratique.",
+        action: "Réserver l’activité / voir les expériences similaires.",
+        badge: "Affiliation activité"
+      },
+      {
+        id: 7,
+        title: "Ponto Final",
+        city: "Lisbonne",
+        category: "Restaurants",
+        price: "€€",
+        district: "Almada",
+        tag: "Vue sur le Tage",
+        description: "Table très recherchée pour son emplacement, excellente pour guides et comparatifs.",
+        love: "Le décor, la désirabilité et la force des recherches naturelles.",
+        forWho: "Déjeuners vue mer, dîner en couple, expérience Lisbonne iconique.",
+        info: "Très utile à relier aux guides “meilleurs restaurants avec vue”.",
+        action: "Voir la fiche / réserver / lire le guide Lisbonne.",
+        badge: "Vue iconique"
+      },
+      {
+        id: 8,
+        title: "Douro River Cruise",
+        city: "Porto",
+        category: "Activités",
+        price: "€€",
+        district: "Ribeira",
+        tag: "Expérience phare",
+        description: "Activité claire, populaire et naturelle pour une logique de conversion.",
+        love: "L’intention utilisateur est très mature, donc très bonne pour la réservation.",
+        forWho: "Première visite, city break, visiteurs court séjour.",
+        info: "Excellente entrée pour affiliation activité à Porto.",
+        action: "Réserver la croisière / lire les meilleures activités Porto.",
+        badge: "Conversion forte"
+      },
+      {
+        id: 9,
+        title: "Memmo Príncipe Real",
+        city: "Lisbonne",
+        category: "Hôtels",
+        price: "€€€€",
+        district: "Príncipe Real",
+        tag: "Design & quartier",
+        description: "Bon hôtel premium pour nourrir les pages quartier, hôtel et city guide.",
+        love: "L’équilibre entre design, emplacement et potentiel affiliation.",
+        forWho: "City breaks premium, couples, voyageurs design.",
+        info: "Très bon candidat pour “où dormir à Lisbonne”.",
+        action: "Réserver / voir les hôtels similaires / lire le guide quartier.",
+        badge: "Design hotel"
+      }
+    ];
 
-<section id="map" class="map">
-  <div class="pin" style="top:40%; left:30%" onclick="showPlace('Lisbonne - Rooftop premium')"></div>
-  <div class="pin" style="top:25%; left:45%" onclick="showPlace('Porto - Hôtel luxe')"></div>
-  <div class="pin" style="top:70%; left:60%" onclick="showPlace('Algarve - Plage')"></div>
+    let currentCity = "";
+    let currentCategory = "";
+    let currentSearch = "";
 
-  <div class="popup" id="popup"></div>
-</section>
+    const listingGrid = document.getElementById("listingGrid");
+    const emptyState = document.getElementById("emptyState");
 
-<section id="places" class="places">
-  <h2>Adresses recommandées</h2>
+    function renderPlaces() {
+      listingGrid.innerHTML = "";
 
-  <div class="place-card">
-    <strong>Seen Sky Bar</strong>
-    <p>Lisbonne · Rooftop · Vue incroyable</p>
-    <button onclick="alert('Redirection réservation')">Réserver</button>
-  </div>
+      const filtered = places.filter(place => {
+        const matchCity = !currentCity || place.city === currentCity;
+        const matchCategory = !currentCategory || place.category === currentCategory;
+        const haystack = (
+          place.title + " " +
+          place.city + " " +
+          place.category + " " +
+          place.district + " " +
+          place.tag + " " +
+          place.description
+        ).toLowerCase();
+        const matchSearch = !currentSearch || haystack.includes(currentSearch.toLowerCase());
+        return matchCity && matchCategory && matchSearch;
+      });
 
-  <div class="place-card">
-    <strong>Torel Avantgarde</strong>
-    <p>Porto · Hôtel · Luxe</p>
-    <button onclick="alert('Redirection réservation')">Réserver</button>
-  </div>
+      if (!filtered.length) {
+        emptyState.style.display = "block";
+        return;
+      }
 
-</section>
+      emptyState.style.display = "none";
 
-<script>
-  function search() {
-    const text = document.getElementById("searchInput").value;
-    const cat = document.getElementById("categorySelect").value;
-    const zone = document.getElementById("zoneSelect").value;
+      filtered.forEach(place => {
+        const card = document.createElement("article");
+        card.className = "listing-card";
+        card.innerHTML = `
+          <div class="listing-visual"></div>
+          <div class="listing-content">
+            <div class="listing-top">
+              <span class="listing-city">${place.city}</span>
+              <span class="price">${place.price}</span>
+            </div>
 
-    alert("Recherche: " + text + " | " + cat + " | " + zone);
-  }
+            <h3>${place.title}</h3>
 
-  function showPlace(info) {
-    const popup = document.getElementById("popup");
-    popup.style.display = "block";
-    popup.innerHTML = "<strong>" + info + "</strong><br><button onclick='alert(\"Voir fiche\")'>Voir</button>";
-  }
-</script>
+            <div class="listing-meta">
+              <span>${place.category}</span>
+              <span>${place.district}</span>
+              <span>${place.tag}</span>
+            </div>
 
+            <p class="listing-desc">${place.description}</p>
+
+            <div class="listing-actions">
+              <button class="btn btn-primary" onclick="openPlaceById(${place.id})">Voir la fiche</button>
+              <button class="btn btn-soft" onclick="alert('CTA réservation / affiliation')">Réserver</button>
+            </div>
+          </div>
+        `;
+        listingGrid.appendChild(card);
+      });
+    }
+
+    function setActiveTab(buttons, activeText) {
+      buttons.forEach(btn => {
+        const matches = btn.textContent.trim() === activeText || (activeText === "Toutes" && btn.textContent.trim() === "Toutes");
+        btn.classList.toggle("active", matches);
+      });
+    }
+
+    function filterByCity(city) {
+      currentCity = city;
+      document.getElementById("citySelect").value = city;
+      setActiveTab(document.querySelectorAll(".tab"), city || "Toutes");
+      renderPlaces();
+      scrollToSection("explorer");
+    }
+
+    function filterByCategory(category) {
+      currentCategory = category;
+      document.getElementById("categorySelect").value = category;
+      renderPlaces();
+      scrollToSection("explorer");
+    }
+
+    function quickSearch(category, city) {
+      currentCategory = category;
+      currentCity = city;
+      currentSearch = "";
+      document.getElementById("searchInput").value = "";
+      document.getElementById("categorySelect").value = category;
+      document.getElementById("citySelect").value = city;
+      setActiveTab(document.querySelectorAll(".tab"), city || "Toutes");
+      renderPlaces();
+      scrollToSection("explorer");
+
+      document.querySelectorAll(".tag").forEach(tag => tag.classList.remove("active"));
+      const clicked = Array.from(document.querySelectorAll(".tag")).find(t => t.textContent.includes(category) && t.textContent.includes(city));
+      if (clicked) clicked.classList.add("active");
+    }
+
+    function applyFilters() {
+      currentSearch = document.getElementById("searchInput").value.trim();
+      currentCategory = document.getElementById("categorySelect").value;
+      currentCity = document.getElementById("citySelect").value;
+      setActiveTab(document.querySelectorAll(".tab"), currentCity || "Toutes");
+      renderPlaces();
+      scrollToSection("explorer");
+    }
+
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function openPlaceById(id) {
+      const place = places.find(p => p.id === id);
+      if (!place) return;
+
+      document.getElementById("modalTitle").textContent = place.title;
+      document.getElementById("modalDesc").textContent = place.description;
+      document.getElementById("modalLove").textContent = place.love;
+      document.getElementById("modalFor").textContent = place.forWho;
+      document.getElementById("modalInfo").textContent = place.info;
+      document.getElementById("modalAction").textContent = place.action;
+
+      const modalMeta = document.getElementById("modalMeta");
+      modalMeta.innerHTML = `
+        <span>${place.city}</span>
+        <span>${place.category}</span>
+        <span>${place.price}</span>
+        <span>${place.district}</span>
+        <span>${place.badge}</span>
+      `;
+
+      const floatingCard = document.getElementById("floatingCard");
+      floatingCard.innerHTML = `
+        <div class="mini-meta">
+          <span>${place.city}</span>
+          <span>${place.category}</span>
+          <span>${place.price}</span>
+          <span>${place.badge}</span>
+        </div>
+        <h3>${place.title}</h3>
+        <p>${place.description}</p>
+        <div class="floating-actions">
+          <button class="btn btn-primary" onclick="openPlaceById(${place.id})">Voir la fiche</button>
+          <button class="btn btn-soft" onclick="alert('CTA réservation / affiliation')">Réserver</button>
+        </div>
+      `;
+
+      document.getElementById("placeModal").classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal(event) {
+      if (event.target.id === "placeModal") {
+        forceCloseModal();
+      }
+    }
+
+    function forceCloseModal() {
+      document.getElementById("placeModal").classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    document.addEventListener("keydown", function(e){
+      if (e.key === "Escape") forceCloseModal();
+      if (e.key === "Enter" && document.activeElement.id === "searchInput") applyFilters();
+    });
+
+    renderPlaces();
+  </script>
 </body>
 </html>
