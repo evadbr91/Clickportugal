@@ -1,474 +1,219 @@
-import React, { useMemo, useState } from "react";
-import { motion } from "framer-motion";
-import {
-  Search,
-  MapPin,
-  Star,
-  Euro,
-  Compass,
-  Hotel,
-  UtensilsCrossed,
-  Waves,
-  Camera,
-  Building2,
-  ChevronRight,
-  Filter,
-  Bookmark,
-  ExternalLink,
-} from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>ClickPortugal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-const categories = [
-  { key: "all", label: "Tout", icon: Compass },
-  { key: "hotels", label: "Hôtels", icon: Hotel },
-  { key: "restaurants", label: "Restaurants", icon: UtensilsCrossed },
-  { key: "rooftops", label: "Rooftops", icon: Building2 },
-  { key: "activities", label: "Activités", icon: Camera },
-  { key: "beaches", label: "Plages", icon: Waves },
-];
-
-const cities = ["Lisbonne", "Porto", "Algarve"];
-
-const places = [
-  {
-    id: 1,
-    name: "Seen Sky Bar",
-    city: "Lisbonne",
-    area: "Avenida da Liberdade",
-    category: "rooftops",
-    price: "€€€",
-    vibe: "Vue panoramique, sunset, chic",
-    audience: "Couples, city break, soirée",
-    why: "Un rooftop emblématique avec une vue spectaculaire sur Lisbonne et une ambiance premium.",
-    featured: true,
-    lat: 38.7209,
-    lng: -9.1457,
-    affiliate: "Réserver une table",
-    rating: 4.8,
-  },
-  {
-    id: 2,
-    name: "Memmo Alfama",
-    city: "Lisbonne",
-    area: "Alfama",
-    category: "hotels",
-    price: "€€€€",
-    vibe: "Boutique hôtel, calme, design",
-    audience: "Couples, premium travellers",
-    why: "Une base idéale pour explorer les ruelles historiques avec un niveau de service haut de gamme.",
-    featured: true,
-    lat: 38.7117,
-    lng: -9.1302,
-    affiliate: "Voir les disponibilités",
-    rating: 4.9,
-  },
-  {
-    id: 3,
-    name: "Praia da Marinha",
-    city: "Algarve",
-    area: "Lagoa",
-    category: "beaches",
-    price: "€",
-    vibe: "Falaises dorées, eau turquoise",
-    audience: "Photographes, familles, road trip",
-    why: "Une des plages les plus iconiques du Portugal, parfaite pour une sélection éditoriale forte.",
-    featured: true,
-    lat: 37.0919,
-    lng: -8.4127,
-    affiliate: "Trouver une activité proche",
-    rating: 4.9,
-  },
-  {
-    id: 4,
-    name: "Cervejaria Brasão",
-    city: "Porto",
-    area: "Aliados",
-    category: "restaurants",
-    price: "€€",
-    vibe: "Cuisine locale, généreuse, vivante",
-    audience: "Food lovers, groupes, week-end",
-    why: "Une excellente porte d’entrée pour découvrir une adresse populaire et vraiment utile.",
-    featured: false,
-    lat: 41.1497,
-    lng: -8.6109,
-    affiliate: "Réserver",
-    rating: 4.6,
-  },
-  {
-    id: 5,
-    name: "Douro Six Bridges Cruise",
-    city: "Porto",
-    area: "Ribeira",
-    category: "activities",
-    price: "€€",
-    vibe: "Accessible, beau, conversion facile",
-    audience: "Première visite, familles, couples",
-    why: "Une activité très monétisable et cohérente avec la promesse inspiration vers action.",
-    featured: false,
-    lat: 41.1402,
-    lng: -8.611,
-    affiliate: "Réserver l’activité",
-    rating: 4.7,
-  },
-  {
-    id: 6,
-    name: "Bela Vista Hotel & Spa",
-    city: "Algarve",
-    area: "Praia da Rocha",
-    category: "hotels",
-    price: "€€€€",
-    vibe: "Mer, luxe discret, adults friendly",
-    audience: "Séjours premium, couples",
-    why: "Une fiche lieu idéale pour un positionnement premium avec forte intention d’achat.",
-    featured: false,
-    lat: 37.1186,
-    lng: -8.5384,
-    affiliate: "Voir les tarifs",
-    rating: 4.8,
-  },
-];
-
-const articles = [
-  {
-    id: 1,
-    title: "Les meilleurs rooftops de Lisbonne",
-    tag: "Sélection",
-    excerpt:
-      "Une page éditoriale premium qui mélange inspiration, filtres et liens utiles pour convertir.",
-  },
-  {
-    id: 2,
-    title: "Où dormir à Porto selon votre style de voyage",
-    tag: "Guide hôtel",
-    excerpt:
-      "Un article structuré pour capter une intention forte et redistribuer vers des fiches monétisables.",
-  },
-  {
-    id: 3,
-    title: "Les plus belles plages de l’Algarve",
-    tag: "Inspiration",
-    excerpt:
-      "Une entrée SEO forte, reliée à la carte, aux catégories et à des offres partenaires.",
-  },
-];
-
-function CategoryPill({ item, active, onClick }) {
-  const Icon = item.icon;
-  return (
-    <button
-      onClick={onClick}
-      className={`flex items-center gap-2 rounded-full border px-4 py-2 text-sm transition ${
-        active
-          ? "border-slate-900 bg-slate-900 text-white"
-          : "border-slate-200 bg-white text-slate-700 hover:border-slate-300"
-      }`}
-    >
-      <Icon className="h-4 w-4" />
-      {item.label}
-    </button>
-  );
-}
-
-function PlaceCard({ place }) {
-  return (
-    <Card className="overflow-hidden rounded-2xl border-slate-200 shadow-sm">
-      <div className="h-48 bg-gradient-to-br from-slate-200 via-stone-100 to-amber-100" />
-      <CardContent className="space-y-4 p-5">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <div className="mb-2 flex flex-wrap items-center gap-2">
-              <Badge variant="secondary" className="rounded-full bg-slate-100 text-slate-700">
-                {categories.find((c) => c.key === place.category)?.label}
-              </Badge>
-              <Badge variant="outline" className="rounded-full">
-                {place.city}
-              </Badge>
-            </div>
-            <h3 className="text-xl font-semibold text-slate-900">{place.name}</h3>
-            <p className="mt-1 flex items-center gap-1 text-sm text-slate-500">
-              <MapPin className="h-4 w-4" /> {place.area}
-            </p>
-          </div>
-          <button className="rounded-full border p-2 text-slate-500 hover:text-slate-900">
-            <Bookmark className="h-4 w-4" />
-          </button>
-        </div>
-
-        <div className="grid grid-cols-3 gap-3 rounded-2xl bg-slate-50 p-3 text-sm">
-          <div>
-            <p className="text-slate-500">Prix</p>
-            <p className="mt-1 font-medium text-slate-900">{place.price}</p>
-          </div>
-          <div>
-            <p className="text-slate-500">Note</p>
-            <p className="mt-1 flex items-center gap-1 font-medium text-slate-900">
-              <Star className="h-4 w-4" /> {place.rating}
-            </p>
-          </div>
-          <div>
-            <p className="text-slate-500">Pour qui</p>
-            <p className="mt-1 truncate font-medium text-slate-900">{place.audience}</p>
-          </div>
-        </div>
-
-        <div className="space-y-2 text-sm text-slate-600">
-          <p><span className="font-medium text-slate-900">Ambiance :</span> {place.vibe}</p>
-          <p><span className="font-medium text-slate-900">Pourquoi on aime :</span> {place.why}</p>
-        </div>
-
-        <div className="flex items-center justify-between gap-3 pt-2">
-          <Button className="rounded-xl">{place.affiliate}</Button>
-          <Button variant="ghost" className="rounded-xl text-slate-700">
-            Voir la fiche <ChevronRight className="ml-1 h-4 w-4" />
-          </Button>
-        </div>
-      </CardContent>
-    </Card>
-  );
-}
-
-function MapPanel({ filtered, selected, onSelect }) {
-  return (
-    <div className="relative overflow-hidden rounded-[28px] border border-slate-200 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,1),_rgba(241,245,249,1))] p-4 shadow-sm">
-      <div className="mb-4 flex items-center justify-between">
-        <div>
-          <p className="text-sm uppercase tracking-[0.2em] text-slate-500">Carte interactive</p>
-          <h3 className="text-2xl font-semibold text-slate-900">Explorer visuellement</h3>
-        </div>
-        <Badge className="rounded-full bg-white text-slate-700 shadow-sm">
-          {filtered.length} résultat{filtered.length > 1 ? "s" : ""}
-        </Badge>
-      </div>
-
-      <div className="relative h-[420px] rounded-[24px] border border-slate-200 bg-gradient-to-br from-sky-50 via-stone-50 to-emerald-50">
-        <div className="absolute inset-0 opacity-60">
-          <div className="absolute left-[20%] top-0 h-full w-px bg-slate-200" />
-          <div className="absolute left-[45%] top-0 h-full w-px bg-slate-200" />
-          <div className="absolute left-[70%] top-0 h-full w-px bg-slate-200" />
-          <div className="absolute top-[25%] h-px w-full bg-slate-200" />
-          <div className="absolute top-[50%] h-px w-full bg-slate-200" />
-          <div className="absolute top-[75%] h-px w-full bg-slate-200" />
-        </div>
-
-        <div className="absolute left-[12%] top-[28%] text-xs font-medium text-slate-500">Porto</div>
-        <div className="absolute left-[26%] top-[56%] text-xs font-medium text-slate-500">Lisbonne</div>
-        <div className="absolute left-[42%] top-[78%] text-xs font-medium text-slate-500">Algarve</div>
-
-        {filtered.map((place, index) => {
-          const positions = {
-            Lisbonne: "left-[28%] top-[58%]",
-            Porto: "left-[16%] top-[30%]",
-            Algarve: "left-[46%] top-[80%]",
-          };
-          const isSelected = selected?.id === place.id;
-          return (
-            <button
-              key={place.id}
-              onClick={() => onSelect(place)}
-              className={`absolute ${positions[place.city]} ${index % 2 === 0 ? "translate-x-0" : "translate-x-8 -translate-y-5"}`}
-            >
-              <div
-                className={`flex h-11 w-11 items-center justify-center rounded-full border-4 border-white shadow-lg transition ${
-                  isSelected ? "scale-110 bg-slate-900 text-white" : "bg-white text-slate-900"
-                }`}
-              >
-                <MapPin className="h-5 w-5" />
-              </div>
-            </button>
-          );
-        })}
-
-        <div className="absolute bottom-4 left-4 rounded-2xl bg-white/90 p-4 shadow-lg backdrop-blur">
-          <p className="text-sm text-slate-500">Objectif produit</p>
-          <p className="max-w-xs text-sm font-medium text-slate-900">
-            Mélanger recherche, carte, fiches lieux et contenus éditoriaux dans une expérience simple et premium.
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default function ClickPortugalMVP() {
-  const [query, setQuery] = useState("");
-  const [activeCategory, setActiveCategory] = useState("all");
-  const [activeCity, setActiveCity] = useState("Toutes");
-
-  const filtered = useMemo(() => {
-    return places.filter((place) => {
-      const matchesCategory = activeCategory === "all" || place.category === activeCategory;
-      const matchesCity = activeCity === "Toutes" || place.city === activeCity;
-      const haystack = `${place.name} ${place.city} ${place.area} ${place.vibe} ${place.audience} ${place.category}`.toLowerCase();
-      const matchesQuery = haystack.includes(query.toLowerCase());
-      return matchesCategory && matchesCity && matchesQuery;
-    });
-  }, [query, activeCategory, activeCity]);
-
-  const [selected, setSelected] = useState(places[0]);
-
-  React.useEffect(() => {
-    if (!filtered.find((p) => p.id === selected?.id)) {
-      setSelected(filtered[0] || null);
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f8f7f5;
+      color: #1f2937;
     }
-  }, [filtered, selected]);
 
-  const featured = filtered.filter((p) => p.featured);
+    header {
+      position: sticky;
+      top: 0;
+      background: white;
+      border-bottom: 1px solid #eee;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-  return (
-    <div className="min-h-screen bg-[#fcfbf8] text-slate-900">
-      <header className="sticky top-0 z-30 border-b border-slate-200/80 bg-[#fcfbf8]/90 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
-          <div>
-            <p className="text-xs uppercase tracking-[0.28em] text-slate-500">Guide digital premium</p>
-            <h1 className="text-2xl font-semibold tracking-tight">CLICKPORTUGAL</h1>
-          </div>
-          <nav className="hidden items-center gap-6 text-sm text-slate-600 md:flex">
-            <a href="#discover" className="hover:text-slate-900">Découvrir</a>
-            <a href="#places" className="hover:text-slate-900">Adresses</a>
-            <a href="#editorial" className="hover:text-slate-900">Guides</a>
-            <a href="#business" className="hover:text-slate-900">Partenaires</a>
-          </nav>
-          <Button className="rounded-xl">Explorer</Button>
-        </div>
-      </header>
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #555;
+    }
 
-      <main>
-        <section className="mx-auto grid max-w-7xl gap-10 px-6 py-12 lg:grid-cols-[1.1fr_0.9fr] lg:px-10 lg:py-16">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="space-y-8"
-          >
-            <div className="space-y-5">
-              <Badge className="rounded-full bg-white px-4 py-1 text-slate-700 shadow-sm">
-                Portugal · Lisbonne · Porto · Algarve
-              </Badge>
-              <h2 className="max-w-3xl text-5xl font-semibold leading-tight tracking-tight lg:text-6xl">
-                Le guide premium pour explorer, filtrer et découvrir les meilleures adresses du Portugal.
-              </h2>
-              <p className="max-w-2xl text-lg leading-8 text-slate-600">
-                Une expérience qui transforme l’inspiration en découverte, puis en action grâce à la recherche,
-                la carte interactive, les fiches lieux et les contenus éditoriaux.
-              </p>
-            </div>
+    .hero {
+      padding: 60px 30px;
+      max-width: 1000px;
+    }
 
-            <Card className="rounded-[28px] border-slate-200 bg-white shadow-sm">
-              <CardContent className="space-y-6 p-5 lg:p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm uppercase tracking-[0.2em] text-slate-500">Recherche intelligente</p>
-                    <h3 className="text-2xl font-semibold">Trouvez une idée, un lieu, une ambiance</h3>
-                  </div>
-                  <div className="hidden rounded-2xl bg-slate-50 p-3 text-slate-500 md:block">
-                    <Filter className="h-5 w-5" />
-                  </div>
-                </div>
+    h1 {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
 
-                <div className="grid gap-4 lg:grid-cols-[1fr_auto]">
-                  <div className="relative">
-                    <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
-                    <Input
-                      value={query}
-                      onChange={(e) => setQuery(e.target.value)}
-                      placeholder="Rooftop, hôtel, plage, musée, restaurant, village, activité..."
-                      className="h-14 rounded-2xl border-slate-200 pl-12 text-base"
-                    />
-                  </div>
-                  <Button className="h-14 rounded-2xl px-6">Rechercher</Button>
-                </div>
+    .search {
+      background: white;
+      padding: 15px;
+      border-radius: 20px;
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
 
-                <div className="flex flex-wrap gap-3">
-                  {categories.map((item) => (
-                    <CategoryPill
-                      key={item.key}
-                      item={item}
-                      active={activeCategory === item.key}
-                      onClick={() => setActiveCategory(item.key)}
-                    />
-                  ))}
-                </div>
+    .search input, .search select {
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+    }
 
-                <div className="flex flex-wrap gap-2">
-                  {["Toutes", ...cities].map((city) => (
-                    <button
-                      key={city}
-                      onClick={() => setActiveCity(city)}
-                      className={`rounded-full px-4 py-2 text-sm transition ${
-                        activeCity === city ? "bg-stone-900 text-white" : "bg-stone-100 text-stone-700"
-                      }`}
-                    >
-                      {city}
-                    </button>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+    .search button {
+      background: black;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
 
-            <div className="grid gap-4 md:grid-cols-3">
-              {[
-                { label: "Catégories", value: "5", detail: "Hôtels, restaurants, rooftops, activités, plages" },
-                { label: "Zones prioritaires", value: "3", detail: "Lisbonne, Porto, Algarve" },
-                { label: "Modèle", value: "Hybride", detail: "Affiliation, sponsorings, listings premium" },
-              ].map((item) => (
-                <Card key={item.label} className="rounded-[24px] border-slate-200 bg-white shadow-sm">
-                  <CardContent className="p-5">
-                    <p className="text-sm text-slate-500">{item.label}</p>
-                    <p className="mt-2 text-3xl font-semibold tracking-tight">{item.value}</p>
-                    <p className="mt-3 text-sm leading-6 text-slate-600">{item.detail}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </motion.div>
+    .categories {
+      padding: 40px 30px;
+    }
 
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            id="discover"
-          >
-            <MapPanel filtered={filtered} selected={selected} onSelect={setSelected} />
-          </motion.div>
-        </section>
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+    }
 
-        <section className="mx-auto max-w-7xl px-6 py-6 lg:px-10" id="places">
-          <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-              <p className="text-sm uppercase tracking-[0.2em] text-slate-500">Sélection éditoriale</p>
-              <h2 className="text-4xl font-semibold tracking-tight">Fiches lieux premium</h2>
-              <p className="mt-2 max-w-2xl text-slate-600">
-                Chaque fiche doit rendre la découverte claire, désirable et immédiatement actionnable.
-              </p>
-            </div>
-            <Button variant="outline" className="rounded-xl">Voir toutes les adresses</Button>
-          </div>
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
 
-          {selected && (
-            <Card className="mb-8 overflow-hidden rounded-[32px] border-slate-200 bg-white shadow-sm">
-              <div className="grid lg:grid-cols-[1.2fr_0.8fr]">
-                <div className="min-h-[320px] bg-gradient-to-br from-amber-100 via-stone-50 to-sky-100" />
-                <CardContent className="flex flex-col justify-between gap-6 p-6 lg:p-8">
-                  <div className="space-y-4">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <Badge className="rounded-full bg-slate-900 text-white">
-                        {categories.find((c) => c.key === selected.category)?.label}
-                      </Badge>
-                      <Badge variant="outline" className="rounded-full">{selected.city}</Badge>
-                    </div>
-                    <div>
-                      <h3 className="text-3xl font-semibold tracking-tight">{selected.name}</h3>
-                      <p className="mt-2 flex items-center gap-2 text-slate-500">
-                        <MapPin className="h-4 w-4" /> {selected.area}
-                      </p>
-                    </div>
-                    <p className="text-base leading-7 text-slate-600">{selected.why}</p>
-                    <div className="grid grid-cols-2 gap-4 rounded-2xl bg-slate-50 p-4 text-sm lg:grid-cols-4">
-                      <div>
-                        <p className="text-slate-500">Prix</p>
-                        <p className="mt-1 font-medium text-slate-900">{selected.price}</p>
-                      </div>
-                      <
+    .card:hover {
+      transform: translateY(-3px);
+    }
+
+    .map {
+      margin: 40px 30px;
+      height: 300px;
+      background: linear-gradient(#e6f7f1, #f5f5f5);
+      border-radius: 20px;
+      position: relative;
+    }
+
+    .pin {
+      position: absolute;
+      background: green;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .popup {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: white;
+      padding: 15px;
+      border-radius: 15px;
+      display: none;
+      max-width: 250px;
+    }
+
+    .places {
+      padding: 40px 30px;
+    }
+
+    .place-card {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 15px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+  <strong>ClickPortugal</strong>
+  <nav>
+    <a href="#categories">Catégories</a>
+    <a href="#map">Carte</a>
+    <a href="#places">Explorer</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Le guide premium du Portugal</h1>
+  <p>Découvre les meilleures adresses : hôtels, rooftops, plages et activités.</p>
+
+  <div class="search">
+    <input placeholder="Rechercher..." id="searchInput">
+    <select id="categorySelect">
+      <option value="">Catégorie</option>
+      <option>Hôtels</option>
+      <option>Restaurants</option>
+      <option>Rooftops</option>
+      <option>Activités</option>
+      <option>Plages</option>
+    </select>
+    <select id="zoneSelect">
+      <option value="">Zone</option>
+      <option>Lisbonne</option>
+      <option>Porto</option>
+      <option>Algarve</option>
+    </select>
+    <button onclick="search()">Explorer</button>
+  </div>
+</section>
+
+<section id="categories" class="categories">
+  <h2>Catégories</h2>
+  <div class="grid">
+    <div class="card">🏨 Hôtels</div>
+    <div class="card">🍽️ Restaurants</div>
+    <div class="card">🍸 Rooftops</div>
+    <div class="card">⛵ Activités</div>
+    <div class="card">🏖️ Plages</div>
+  </div>
+</section>
+
+<section id="map" class="map">
+  <div class="pin" style="top:40%; left:30%" onclick="showPlace('Lisbonne - Rooftop premium')"></div>
+  <div class="pin" style="top:25%; left:45%" onclick="showPlace('Porto - Hôtel luxe')"></div>
+  <div class="pin" style="top:70%; left:60%" onclick="showPlace('Algarve - Plage')"></div>
+
+  <div class="popup" id="popup"></div>
+</section>
+
+<section id="places" class="places">
+  <h2>Adresses recommandées</h2>
+
+  <div class="place-card">
+    <strong>Seen Sky Bar</strong>
+    <p>Lisbonne · Rooftop · Vue incroyable</p>
+    <button onclick="alert('Redirection réservation')">Réserver</button>
+  </div>
+
+  <div class="place-card">
+    <strong>Torel Avantgarde</strong>
+    <p>Porto · Hôtel · Luxe</p>
+    <button onclick="alert('Redirection réservation')">Réserver</button>
+  </div>
+
+</section>
+
+<script>
+  function search() {
+    const text = document.getElementById("searchInput").value;
+    const cat = document.getElementById("categorySelect").value;
+    const zone = document.getElementById("zoneSelect").value;
+
+    alert("Recherche: " + text + " | " + cat + " | " + zone);
+  }
+
+  function showPlace(info) {
+    const popup = document.getElementById("popup");
+    popup.style.display = "block";
+    popup.innerHTML = "<strong>" + info + "</strong><br><button onclick='alert(\"Voir fiche\")'>Voir</button>";
+  }
+</script>
+
+</body>
+</html>
