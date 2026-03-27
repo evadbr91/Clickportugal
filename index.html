@@ -22,11 +22,12 @@
       --dark:#0f1720;
       --gold:#b38a4a;
       --shadow:0 20px 50px rgba(15,23,32,.08);
+      --shadow-soft:0 16px 30px rgba(15,23,32,.06);
       --radius-xl:28px;
       --radius-lg:22px;
       --radius-md:16px;
       --radius-sm:12px;
-      --max:1240px;
+      --max:1280px;
     }
 
     *{box-sizing:border-box}
@@ -127,7 +128,7 @@
     .btn-primary{
       background:var(--dark);
       color:#fff;
-      box-shadow:var(--shadow);
+      box-shadow:var(--shadow-soft);
     }
     .btn-primary:hover{background:#060b11}
     .btn-soft{
@@ -141,31 +142,39 @@
       color:#fff;
     }
     .btn-green:hover{background:var(--primary-2)}
+    .btn-gold{
+      background:linear-gradient(135deg, #b38a4a, #9a7336);
+      color:#fff;
+      box-shadow:var(--shadow-soft);
+    }
+    .btn-gold:hover{filter:brightness(.98)}
 
     .hero{
-      padding:42px 0 24px;
+      padding:34px 0 24px;
     }
 
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1.15fr .85fr;
-      gap:28px;
-      align-items:stretch;
-    }
-
-    .hero-left,
-    .hero-right,
-    .panel{
-      background:rgba(255,255,255,.86);
+    .hero-shell{
+      background:rgba(255,255,255,.82);
       border:1px solid rgba(20,32,43,.06);
       box-shadow:var(--shadow);
-      border-radius:var(--radius-xl);
+      border-radius:34px;
+      padding:24px;
+      overflow:hidden;
     }
 
-    .hero-left{
-      padding:34px;
-      position:relative;
-      overflow:hidden;
+    .hero-topline{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:18px;
+    }
+
+    .hero-actions-right{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
     }
 
     .eyebrow{
@@ -184,31 +193,122 @@
     }
 
     h1{
-      font-size:clamp(38px, 5vw, 72px);
+      font-size:clamp(34px, 5vw, 66px);
       line-height:.98;
       margin:18px 0 16px;
       letter-spacing:-.05em;
-      max-width:820px;
+      max-width:900px;
     }
 
     .hero-copy{
       color:var(--muted);
       font-size:18px;
-      max-width:760px;
-      margin-bottom:26px;
+      max-width:860px;
+      margin:0;
+    }
+
+    .lang-switch{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:#fff;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .lang-btn{
+      border:none;
+      background:transparent;
+      color:#425369;
+      font-weight:800;
+      padding:9px 14px;
+      border-radius:999px;
+      cursor:pointer;
+    }
+
+    .lang-btn.active{
+      background:var(--dark);
+      color:#fff;
+    }
+
+    .hero-main{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:20px;
+      align-items:stretch;
+    }
+
+    .hero-search-panel,
+    .hero-map-panel,
+    .panel{
+      background:rgba(255,255,255,.92);
+      border:1px solid rgba(20,32,43,.06);
+      box-shadow:var(--shadow-soft);
+      border-radius:30px;
+      position:relative;
+    }
+
+    .hero-search-panel{
+      padding:24px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+
+    .hero-map-panel{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .search-panel-head{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:flex-start;
+      margin-bottom:18px;
+    }
+
+    .search-panel-head small{
+      display:block;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font-size:11px;
+      font-weight:800;
+      margin-bottom:8px;
+    }
+
+    .search-panel-head h2{
+      margin:0;
+      font-size:32px;
+      line-height:1.02;
+      letter-spacing:-.04em;
+    }
+
+    .search-panel-note{
+      max-width:220px;
+      color:var(--muted);
+      font-size:13px;
+      text-align:right;
     }
 
     .search-card{
       background:#fff;
       border:1px solid var(--line);
-      border-radius:24px;
+      border-radius:26px;
       padding:14px;
+      box-shadow:var(--shadow-soft);
     }
 
     .search-grid{
       display:grid;
-      grid-template-columns:1.6fr 1fr 1fr auto;
+      grid-template-columns:1.5fr .8fr .8fr auto;
       gap:12px;
+      align-items:end;
     }
 
     .field{
@@ -225,7 +325,7 @@
     }
 
     .field input, .field select{
-      height:52px;
+      height:54px;
       border:1px solid var(--line);
       border-radius:16px;
       padding:0 16px;
@@ -266,40 +366,31 @@
       border-color:rgba(15,118,110,.18);
     }
 
-    .hero-stats{
+    .search-insight{
       display:grid;
-      grid-template-columns:repeat(4,1fr);
+      grid-template-columns:repeat(3,1fr);
       gap:12px;
-      margin-top:24px;
+      margin-top:16px;
     }
 
-    .stat{
+    .insight{
       background:#fff;
       border:1px solid var(--line);
       border-radius:18px;
-      padding:16px;
+      padding:14px;
     }
 
-    .stat strong{
+    .insight strong{
       display:block;
-      font-size:24px;
+      font-size:22px;
       letter-spacing:-.04em;
     }
 
-    .stat span{
+    .insight span{
       display:block;
       font-size:13px;
       color:var(--muted);
       margin-top:4px;
-    }
-
-    .hero-right{
-      padding:18px;
-      display:flex;
-      flex-direction:column;
-      gap:16px;
-      position:relative;
-      overflow:hidden;
     }
 
     .map-head{
@@ -307,7 +398,7 @@
       align-items:flex-start;
       justify-content:space-between;
       gap:12px;
-      padding:10px 8px 0;
+      padding:6px 6px 0;
     }
 
     .map-head small{
@@ -341,8 +432,8 @@
 
     .map-box{
       position:relative;
-      min-height:520px;
-      border-radius:24px;
+      min-height:560px;
+      border-radius:26px;
       overflow:hidden;
       border:1px solid var(--line);
       background:
@@ -386,7 +477,9 @@
       background:var(--primary);
       box-shadow:0 0 0 10px rgba(15,118,110,.12);
       transition:.2s ease;
+      z-index:2;
     }
+
     .map-pin:hover{transform:scale(1.08)}
     .map-pin::after{
       content:"";
@@ -396,17 +489,26 @@
       background:#fff;
     }
 
+    .map-pin.hidden{display:none}
+
+    .map-pin.active{
+      background:#b38a4a;
+      box-shadow:0 0 0 12px rgba(179,138,74,.18);
+      transform:scale(1.08);
+    }
+
     .floating-card{
       position:absolute;
       left:18px;
       right:18px;
       bottom:18px;
-      background:rgba(255,255,255,.95);
+      background:rgba(255,255,255,.96);
       backdrop-filter: blur(10px);
       border:1px solid var(--line);
       border-radius:22px;
       padding:18px;
       box-shadow:var(--shadow);
+      z-index:3;
     }
 
     .mini-meta{
@@ -442,6 +544,17 @@
       gap:10px;
       margin-top:14px;
       flex-wrap:wrap;
+    }
+
+    .conversion-note{
+      margin-top:14px;
+      background:#fffaf2;
+      border:1px solid rgba(179,138,74,.16);
+      border-radius:18px;
+      padding:14px 16px;
+      color:#5e4a24;
+      font-size:14px;
+      font-weight:600;
     }
 
     section{
@@ -662,8 +775,8 @@
     }
 
     .listing-card.hidden{display:none}
-
     .listing-card:hover{transform:translateY(-4px)}
+
     .listing-visual{
       aspect-ratio:16/10;
       background:
@@ -890,7 +1003,7 @@
     .modal.open{display:flex}
 
     .modal-card{
-      width:min(920px, 100%);
+      width:min(980px, 100%);
       background:#fff;
       border-radius:28px;
       box-shadow:0 30px 80px rgba(0,0,0,.25);
@@ -965,7 +1078,7 @@
     }
 
     @media (max-width: 1120px){
-      .hero-grid,
+      .hero-main,
       .feature-band,
       .footer-cta{
         grid-template-columns:1fr;
@@ -974,12 +1087,12 @@
       .listing-grid{grid-template-columns:repeat(2,1fr)}
       .seo-grid{grid-template-columns:repeat(2,1fr)}
       .roadmap{grid-template-columns:1fr}
-      .hero-stats{grid-template-columns:repeat(2,1fr)}
     }
 
     @media (max-width: 880px){
       .nav{display:none}
       .search-grid{grid-template-columns:1fr}
+      .search-insight,
       .category-grid,
       .listing-grid,
       .seo-grid,
@@ -989,21 +1102,22 @@
       }
       .modal-card{grid-template-columns:1fr}
       .modal-visual{min-height:240px}
-      .hero-left,.hero-right,.panel{padding:20px}
-      .map-box{min-height:430px}
-      .section-head{flex-direction:column;align-items:flex-start}
+      .hero-search-panel,.hero-map-panel,.panel{padding:20px}
+      .map-box{min-height:460px}
+      .section-head,.hero-topline{flex-direction:column;align-items:flex-start}
+      .search-panel-note{text-align:left;max-width:none}
     }
 
     @media (max-width: 560px){
       .topbar-inner{min-height:70px}
       .hero{padding-top:24px}
-      .hero-left{padding:20px}
-      .hero-stats{grid-template-columns:1fr 1fr}
+      .hero-shell{padding:16px}
       .floating-card{left:12px;right:12px;bottom:12px;padding:14px}
       .category-grid{grid-template-columns:1fr 1fr}
       .footer-cta{padding:24px}
       .brand-text strong{font-size:19px}
       h1{font-size:40px}
+      .map-box{min-height:430px}
     }
   </style>
 </head>
@@ -1014,120 +1128,147 @@
       <a href="#" class="brand">
         <div class="brand-badge">CP</div>
         <div class="brand-text">
-          <small>Guide digital premium</small>
+          <small id="brandKicker">Guide digital premium</small>
           <strong>ClickPortugal</strong>
         </div>
       </a>
 
       <nav class="nav">
-        <a href="#categories">Catégories</a>
-        <a href="#destinations">Destinations</a>
-        <a href="#explorer">Explorer</a>
-        <a href="#guides">Guides</a>
-        <a href="#roadmap">Concept</a>
+        <a href="#categories" id="navCategories">Catégories</a>
+        <a href="#destinations" id="navDestinations">Carte</a>
+        <a href="#explorer" id="navExplorer">Explorer</a>
+        <a href="#guides" id="navGuides">Guides</a>
+        <a href="#roadmap" id="navConcept">Concept</a>
       </nav>
 
-      <button class="btn btn-primary" onclick="scrollToSection('explorer')">Voir les adresses</button>
+      <button class="btn btn-primary" onclick="scrollToSection('explorer')" id="topbarCta">Voir les adresses</button>
     </div>
   </header>
 
   <main>
     <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-left">
-          <div class="eyebrow">France - V1 - Lisbonne - Porto - Algarve</div>
-          <h1>Le guide premium pour explorer, filtrer et découvrir les meilleures adresses du Portugal.</h1>
-          <p class="hero-copy">
-            ClickPortugal mélange recherche, carte, fiches lieux et contenus éditoriaux pour transformer
-            l’inspiration en découverte, puis en conversion. Une approche plus élégante, plus utile et plus rentable
-            qu’un simple blog voyage.
-          </p>
-
-          <div class="search-card">
-            <div class="search-grid">
-              <div class="field">
-                <label for="searchInput">Recherche</label>
-                <input id="searchInput" type="text" placeholder="Rooftop, hôtel, plage, activité, quartier..." />
-              </div>
-
-              <div class="field">
-                <label for="categorySelect">Catégorie</label>
-                <select id="categorySelect">
-                  <option value="">Toutes</option>
-                  <option value="Hôtels">Hôtels</option>
-                  <option value="Restaurants">Restaurants</option>
-                  <option value="Rooftops">Rooftops</option>
-                  <option value="Activités">Activités</option>
-                  <option value="Plages">Plages</option>
-                </select>
-              </div>
-
-              <div class="field">
-                <label for="citySelect">Destination</label>
-                <select id="citySelect">
-                  <option value="">Toutes</option>
-                  <option value="Lisbonne">Lisbonne</option>
-                  <option value="Porto">Porto</option>
-                  <option value="Algarve">Algarve</option>
-                </select>
-              </div>
-
-              <div class="field">
-                <label>&nbsp;</label>
-                <button class="btn btn-green" onclick="applyFilters()">Explorer</button>
-              </div>
-            </div>
-
-            <div class="quick-tags">
-              <button class="tag" onclick="quickSearch('Rooftops','Lisbonne')">🍸 Rooftops Lisbonne</button>
-              <button class="tag" onclick="quickSearch('Hôtels','Porto')">🏨 Hôtels Porto</button>
-              <button class="tag" onclick="quickSearch('Plages','Algarve')">🏖️ Plages Algarve</button>
-              <button class="tag" onclick="quickSearch('Activités','Lisbonne')">⛵ Activités Lisbonne</button>
-            </div>
-          </div>
-
-          <div class="hero-stats">
-            <div class="stat"><strong>5</strong><span>catégories de départ</span></div>
-            <div class="stat"><strong>3</strong><span>zones prioritaires</span></div>
-            <div class="stat"><strong>30-50</strong><span>fiches lieux visées</span></div>
-            <div class="stat"><strong>15-20</strong><span>articles forts</span></div>
-          </div>
-        </div>
-
-        <div class="hero-right">
-          <div class="map-head">
+      <div class="container">
+        <div class="hero-shell">
+          <div class="hero-topline">
             <div>
-              <small>Différenciateur UX</small>
-              <h2>Carte interactive + fiche lieu</h2>
+              <div class="eyebrow" id="heroEyebrow">Portugal premium city guide</div>
+              <h1 id="heroTitle">La recherche et la carte au centre de l’expérience.</h1>
+              <p class="hero-copy" id="heroCopy">
+                Un city guide premium inspiré d’Airbnb et Google Maps, pensé pour découvrir,
+                filtrer et réserver les meilleures adresses du Portugal avec une approche luxe et lifestyle.
+              </p>
             </div>
-            <div class="pill">Affiliation prête dès la V1</div>
+
+            <div class="hero-actions-right">
+              <div class="lang-switch">
+                <button class="lang-btn active" onclick="setLanguage('fr')">FR</button>
+                <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+              </div>
+            </div>
           </div>
 
-          <div class="map-box map-gridlines" id="destinations">
-            <div class="zone-label" style="top: 20%; left: 18%;">Porto</div>
-            <div class="zone-label" style="top: 42%; left: 30%;">Lisbonne</div>
-            <div class="zone-label" style="top: 70%; left: 57%;">Algarve</div>
+          <div class="hero-main">
+            <div class="hero-search-panel">
+              <div>
+                <div class="search-panel-head">
+                  <div>
+                    <small id="searchHeadLabel">Recherche premium</small>
+                    <h2 id="searchHeadTitle">Tape une envie, filtre, puis laisse la carte répondre.</h2>
+                  </div>
+                  <p class="search-panel-note" id="searchHeadNote">
+                    Exemple : si l’utilisateur tape “rooftop”, seuls les rooftops restent visibles sur la carte et dans les fiches.
+                  </p>
+                </div>
 
-            <button class="map-pin" style="top: 29%; left: 34%;" onclick="openPlaceById(3)"></button>
-            <button class="map-pin" style="top: 44%; left: 28%;" onclick="openPlaceById(1)"></button>
-            <button class="map-pin" style="top: 48%; left: 33%;" onclick="openPlaceById(2)"></button>
-            <button class="map-pin" style="top: 67%; left: 59%;" onclick="openPlaceById(5)"></button>
-            <button class="map-pin" style="top: 72%; left: 66%;" onclick="openPlaceById(6)"></button>
+                <div class="search-card">
+                  <div class="search-grid">
+                    <div class="field">
+                      <label for="searchInput" id="labelSearch">Recherche</label>
+                      <input id="searchInput" type="text" placeholder="Rooftop, hôtel, plage, activité, quartier..." />
+                    </div>
 
-            <div class="floating-card" id="floatingCard">
-              <div class="mini-meta">
-                <span>Lisbonne</span>
-                <span>Rooftop</span>
-                <span>€€€</span>
-                <span>Idéal sunset</span>
+                    <div class="field">
+                      <label for="categorySelect" id="labelCategory">Catégorie</label>
+                      <select id="categorySelect">
+                        <option value="" data-i18n="all">Toutes</option>
+                        <option value="Hôtels">Hôtels</option>
+                        <option value="Restaurants">Restaurants</option>
+                        <option value="Rooftops">Rooftops</option>
+                        <option value="Activités">Activités</option>
+                        <option value="Plages">Plages</option>
+                      </select>
+                    </div>
+
+                    <div class="field">
+                      <label for="citySelect" id="labelDestination">Destination</label>
+                      <select id="citySelect">
+                        <option value="" data-i18n="all">Toutes</option>
+                        <option value="Lisbonne">Lisbonne</option>
+                        <option value="Porto">Porto</option>
+                        <option value="Algarve">Algarve</option>
+                      </select>
+                    </div>
+
+                    <div class="field">
+                      <label>&nbsp;</label>
+                      <button class="btn btn-green" onclick="applyFilters()" id="searchCta">Explorer</button>
+                    </div>
+                  </div>
+
+                  <div class="quick-tags">
+                    <button class="tag" onclick="quickSearch('Rooftops','Lisbonne')">🍸 Rooftops Lisbonne</button>
+                    <button class="tag" onclick="quickSearch('Hôtels','Porto')">🏨 Hôtels Porto</button>
+                    <button class="tag" onclick="quickSearch('Plages','Algarve')">🏖️ Plages Algarve</button>
+                    <button class="tag" onclick="quickSearch('Activités','Lisbonne')">⛵ Activités Lisbonne</button>
+                  </div>
+                </div>
+
+                <div class="search-insight">
+                  <div class="insight">
+                    <strong>FR + EN</strong>
+                    <span id="insightOne">Bilingue dès la V1 pour doubler l’audience potentielle.</span>
+                  </div>
+                  <div class="insight">
+                    <strong>Affiliation</strong>
+                    <span id="insightTwo">CTA intégrés avec élégance dans chaque fiche lieu.</span>
+                  </div>
+                  <div class="insight">
+                    <strong>Lifestyle</strong>
+                    <span id="insightThree">Un rendu premium, sobre et orienté conversion.</span>
+                  </div>
+                </div>
               </div>
-              <h3>Seen Sky Bar</h3>
-              <p>
-                Vue panoramique, ambiance premium, cocktails, belle fiche éditoriale et action claire vers la réservation.
-              </p>
-              <div class="floating-actions">
-                <button class="btn btn-primary" onclick="openPlaceById(1)">Voir la fiche</button>
-                <button class="btn btn-soft" onclick="scrollToSection('explorer')">Explorer les lieux</button>
+
+              <div class="conversion-note" id="conversionNote">
+                La fiche lieu ne doit pas ressembler à une pub : elle doit donner envie, rassurer, puis amener naturellement à “Réserver une table”, “Vérifier les disponibilités” ou “Découvrir l’expérience”.
+              </div>
+            </div>
+
+            <div class="hero-map-panel">
+              <div class="map-head">
+                <div>
+                  <small id="mapLabel">Différenciateur UX</small>
+                  <h2 id="mapTitle">Carte interactive filtrée en temps réel</h2>
+                </div>
+                <div class="pill" id="mapPill">Affiliation prête dès la V1</div>
+              </div>
+
+              <div class="map-box map-gridlines" id="destinations">
+                <div class="zone-label" style="top: 20%; left: 18%;" id="zonePorto">Porto</div>
+                <div class="zone-label" style="top: 42%; left: 30%;" id="zoneLisbon">Lisbonne</div>
+                <div class="zone-label" style="top: 70%; left: 57%;" id="zoneAlgarve">Algarve</div>
+
+                <button class="map-pin" data-id="1" style="top: 44%; left: 28%;" onclick="openPlaceById(1)"></button>
+                <button class="map-pin" data-id="2" style="top: 48%; left: 33%;" onclick="openPlaceById(2)"></button>
+                <button class="map-pin" data-id="3" style="top: 29%; left: 34%;" onclick="openPlaceById(3)"></button>
+                <button class="map-pin" data-id="4" style="top: 26%; left: 38%;" onclick="openPlaceById(4)"></button>
+                <button class="map-pin" data-id="5" style="top: 67%; left: 59%;" onclick="openPlaceById(5)"></button>
+                <button class="map-pin" data-id="6" style="top: 72%; left: 66%;" onclick="openPlaceById(6)"></button>
+                <button class="map-pin" data-id="7" style="top: 51%; left: 24%;" onclick="openPlaceById(7)"></button>
+                <button class="map-pin" data-id="8" style="top: 34%; left: 41%;" onclick="openPlaceById(8)"></button>
+                <button class="map-pin" data-id="9" style="top: 45%; left: 35%;" onclick="openPlaceById(9)"></button>
+
+                <div class="floating-card" id="floatingCard"></div>
               </div>
             </div>
           </div>
@@ -1139,10 +1280,10 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <small>Architecture produit V1</small>
-            <h2>5 catégories maximum pour une base simple, lisible et crédible.</h2>
+            <small id="categoriesLabel">Architecture produit V1</small>
+            <h2 id="categoriesTitle">5 catégories maximum pour une base simple, lisible et crédible.</h2>
           </div>
-          <p>
+          <p id="categoriesCopy">
             Le site doit rester clair au lancement, tout en étant assez fort pour soutenir la découverte,
             le SEO, la navigation interne et la monétisation.
           </p>
@@ -1152,94 +1293,94 @@
           <article class="category-card" onclick="filterByCategory('Hôtels')">
             <div class="category-icon">🏨</div>
             <h3>Hôtels</h3>
-            <p>Boutique hôtels, design stays, adresses premium, quartiers où dormir.</p>
-            <span class="category-link">Explorer →</span>
+            <p id="catHotelsDesc">Boutique hôtels, design stays, adresses premium, quartiers où dormir.</p>
+            <span class="category-link" id="catHotelsLink">Explorer →</span>
           </article>
 
           <article class="category-card" onclick="filterByCategory('Restaurants')">
             <div class="category-icon">🍽️</div>
             <h3>Restaurants</h3>
-            <p>Tables signature, bonnes adresses locales, spots élégants et sélections utiles.</p>
-            <span class="category-link">Explorer →</span>
+            <p id="catRestaurantsDesc">Tables signature, bonnes adresses locales, spots élégants et sélections utiles.</p>
+            <span class="category-link" id="catRestaurantsLink">Explorer →</span>
           </article>
 
           <article class="category-card" onclick="filterByCategory('Rooftops')">
             <div class="category-icon">🍸</div>
             <h3>Rooftops</h3>
-            <p>Les meilleurs spots coucher de soleil, cocktails et vues iconiques.</p>
-            <span class="category-link">Explorer →</span>
+            <p id="catRooftopsDesc">Les meilleurs spots coucher de soleil, cocktails et vues iconiques.</p>
+            <span class="category-link" id="catRooftopsLink">Explorer →</span>
           </article>
 
           <article class="category-card" onclick="filterByCategory('Activités')">
             <div class="category-icon">⛵</div>
             <h3>Activités</h3>
-            <p>Excursions, transferts, expériences et réservations monétisables dès la V1.</p>
-            <span class="category-link">Explorer →</span>
+            <p id="catActivitiesDesc">Excursions, transferts, expériences et réservations monétisables dès la V1.</p>
+            <span class="category-link" id="catActivitiesLink">Explorer →</span>
           </article>
 
           <article class="category-card" onclick="filterByCategory('Plages')">
             <div class="category-icon">🏖️</div>
             <h3>Plages</h3>
-            <p>Spots iconiques, criques premium, plages accessibles et sélections régionales.</p>
-            <span class="category-link">Explorer →</span>
+            <p id="catBeachesDesc">Spots iconiques, criques premium, plages accessibles et sélections régionales.</p>
+            <span class="category-link" id="catBeachesLink">Explorer →</span>
           </article>
         </div>
 
         <div class="feature-band">
           <div class="band-card editorial-card">
-            <small style="display:block; letter-spacing:.14em; text-transform:uppercase; font-size:11px; font-weight:800; color:rgba(255,255,255,.62);">Positionnement éditorial</small>
-            <h2 style="margin:8px 0 12px; font-size:40px; line-height:1.02; letter-spacing:-.05em;">
+            <small style="display:block; letter-spacing:.14em; text-transform:uppercase; font-size:11px; font-weight:800; color:rgba(255,255,255,.62);" id="editorialLabel">Positionnement éditorial</small>
+            <h2 style="margin:8px 0 12px; font-size:40px; line-height:1.02; letter-spacing:-.05em;" id="editorialTitle">
               Un média éditorial, un moteur de découverte et une plateforme de bonnes adresses.
             </h2>
-            <p>
+            <p id="editorialCopy">
               Le design doit soutenir les contenus à forte valeur ajoutée, le maillage SEO, la recherche,
               la carte, les lieux similaires et les intentions de réservation, sans jamais ressembler à un blog générique.
             </p>
 
             <div class="editorial-list">
               <div class="editorial-item">
-                <small>Guide</small>
-                Les meilleurs rooftops de Lisbonne
+                <small id="guideTag">Guide</small>
+                <span id="guideItemOne">Les meilleurs rooftops de Lisbonne</span>
               </div>
               <div class="editorial-item">
-                <small>Comparatif</small>
-                Où dormir à Porto : 7 quartiers à comparer
+                <small id="comparisonTag">Comparatif</small>
+                <span id="guideItemTwo">Où dormir à Porto : 7 quartiers à comparer</span>
               </div>
               <div class="editorial-item">
-                <small>Sélection</small>
-                Les plus belles plages de l’Algarve
+                <small id="selectionTag">Sélection</small>
+                <span id="guideItemThree">Les plus belles plages de l’Algarve</span>
               </div>
               <div class="editorial-item">
-                <small>Itinéraire</small>
-                Portugal premium : 4 jours entre city break et mer
+                <small id="itineraryTag">Itinéraire</small>
+                <span id="guideItemFour">Portugal premium : 4 jours entre city break et mer</span>
               </div>
             </div>
           </div>
 
           <div class="band-card business-card">
-            <small style="display:block; letter-spacing:.14em; text-transform:uppercase; font-size:11px; font-weight:800; color:var(--muted);">Business model</small>
-            <h2 style="margin:8px 0 0; font-size:38px; line-height:1.02; letter-spacing:-.05em;">Pensé comme un produit rentable, pas comme une accumulation de pages.</h2>
+            <small style="display:block; letter-spacing:.14em; text-transform:uppercase; font-size:11px; font-weight:800; color:var(--muted);" id="businessLabel">Business model</small>
+            <h2 style="margin:8px 0 0; font-size:38px; line-height:1.02; letter-spacing:-.05em;" id="businessTitle">Pensé comme un produit rentable, pas comme une accumulation de pages.</h2>
 
             <div class="business-grid">
               <div class="business-item">
-                <strong>Affiliation activités</strong>
-                <span>Excursions, billets, transferts, expériences. Monétisation prioritaire dès la V1.</span>
+                <strong id="businessOneTitle">Affiliation activités</strong>
+                <span id="businessOneCopy">Excursions, billets, transferts, expériences. Monétisation prioritaire dès la V1.</span>
               </div>
               <div class="business-item">
-                <strong>Affiliation travel</strong>
-                <span>Hôtels, voiture, services voyage et comparateurs après validation.</span>
+                <strong id="businessTwoTitle">Affiliation travel</strong>
+                <span id="businessTwoCopy">Hôtels, voiture, services voyage et comparateurs après validation.</span>
               </div>
               <div class="business-item">
-                <strong>Contenus sponsorisés</strong>
-                <span>Mises en avant premium une fois la crédibilité installée.</span>
+                <strong id="businessThreeTitle">Contenus sponsorisés</strong>
+                <span id="businessThreeCopy">Mises en avant premium une fois la crédibilité installée.</span>
               </div>
               <div class="business-item">
-                <strong>Listings premium</strong>
-                <span>Visibilité renforcée pour établissements partenaires et adresses phares.</span>
+                <strong id="businessFourTitle">Listings premium</strong>
+                <span id="businessFourCopy">Visibilité renforcée pour établissements partenaires et adresses phares.</span>
               </div>
             </div>
 
-            <div class="highlight-box">
+            <div class="highlight-box" id="businessHighlight">
               Chaque bloc doit améliorer la compréhension du site, l’expérience utilisateur et la capacité à générer du revenu.
             </div>
           </div>
@@ -1251,17 +1392,17 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <small>Explorer les lieux</small>
-            <h2>Des fiches standardisées qui inspirent, rassurent et convertissent.</h2>
+            <small id="exploreLabel">Explorer les lieux</small>
+            <h2 id="exploreTitle">Des fiches standardisées qui inspirent, rassurent et convertissent.</h2>
           </div>
-          <p>
-            Chaque fiche met en avant : nom, ville, quartier, GPS, gamme de prix, pour qui, pourquoi on aime,
+          <p id="exploreCopy">
+            Chaque fiche met en avant : nom, ville, quartier, gamme de prix, pour qui, pourquoi on aime,
             conseils utiles, lieux similaires et action de réservation.
           </p>
         </div>
 
         <div class="city-tabs">
-          <button class="tab active" onclick="filterByCity('')">Toutes</button>
+          <button class="tab active" onclick="filterByCity('')" id="tabAll">Toutes</button>
           <button class="tab" onclick="filterByCity('Lisbonne')">Lisbonne</button>
           <button class="tab" onclick="filterByCity('Porto')">Porto</button>
           <button class="tab" onclick="filterByCity('Algarve')">Algarve</button>
@@ -1279,10 +1420,10 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <small>Guides à forte valeur ajoutée</small>
-            <h2>Le contenu éditorial doit nourrir le SEO, la navigation et la conversion.</h2>
+            <small id="guidesLabel">Guides à forte valeur ajoutée</small>
+            <h2 id="guidesTitle">Le contenu éditorial doit nourrir le SEO, la navigation et la conversion.</h2>
           </div>
-          <p>
+          <p id="guidesCopy">
             Articles utiles, comparatifs, sélections, itinéraires et guides pratiques pour capter les intentions concrètes
             et faire circuler naturellement l’utilisateur entre articles, catégories, villes et fiches lieux.
           </p>
@@ -1291,30 +1432,30 @@
         <div class="seo-grid">
           <article class="seo-card">
             <small>Rooftops</small>
-            <h3>Les meilleurs rooftops de Lisbonne</h3>
-            <p>Page éditoriale forte avec lieux sélectionnés, carte, filtres et CTA réservation.</p>
-            <button class="btn btn-soft" onclick="alert('Maquette article SEO : meilleurs rooftops de Lisbonne')">Voir l’article</button>
+            <h3 id="seoOneTitle">Les meilleurs rooftops de Lisbonne</h3>
+            <p id="seoOneCopy">Page éditoriale forte avec lieux sélectionnés, carte, filtres et CTA réservation.</p>
+            <button class="btn btn-soft" onclick="alert(translations[currentLang].alerts.article1)" id="seoOneBtn">Voir l’article</button>
           </article>
 
           <article class="seo-card">
             <small>Hôtels</small>
-            <h3>Où dormir à Porto : les meilleurs quartiers</h3>
-            <p>Comparatif utile pour capter l’intention, mailler les hôtels et rassurer avant conversion.</p>
-            <button class="btn btn-soft" onclick="alert('Maquette article SEO : où dormir à Porto')">Voir l’article</button>
+            <h3 id="seoTwoTitle">Où dormir à Porto : les meilleurs quartiers</h3>
+            <p id="seoTwoCopy">Comparatif utile pour capter l’intention, mailler les hôtels et rassurer avant conversion.</p>
+            <button class="btn btn-soft" onclick="alert(translations[currentLang].alerts.article2)" id="seoTwoBtn">Voir l’article</button>
           </article>
 
           <article class="seo-card">
             <small>Plages</small>
-            <h3>Les plus belles plages de l’Algarve</h3>
-            <p>Article inspiration + praticité + sélection de lieux similaires et conseils d’accès.</p>
-            <button class="btn btn-soft" onclick="alert('Maquette article SEO : plages Algarve')">Voir l’article</button>
+            <h3 id="seoThreeTitle">Les plus belles plages de l’Algarve</h3>
+            <p id="seoThreeCopy">Article inspiration + praticité + sélection de lieux similaires et conseils d’accès.</p>
+            <button class="btn btn-soft" onclick="alert(translations[currentLang].alerts.article3)" id="seoThreeBtn">Voir l’article</button>
           </article>
 
           <article class="seo-card">
-            <small>Itinéraire</small>
-            <h3>Portugal premium : city break, mer et expériences</h3>
-            <p>Format éditorial parfait pour relier activités, hôtels et destinations phares.</p>
-            <button class="btn btn-soft" onclick="alert('Maquette article SEO : itinéraire premium')">Voir l’article</button>
+            <small id="seoItineraryLabel">Itinéraire</small>
+            <h3 id="seoFourTitle">Portugal premium : city break, mer et expériences</h3>
+            <p id="seoFourCopy">Format éditorial parfait pour relier activités, hôtels et destinations phares.</p>
+            <button class="btn btn-soft" onclick="alert(translations[currentLang].alerts.article4)" id="seoFourBtn">Voir l’article</button>
           </article>
         </div>
       </div>
@@ -1324,10 +1465,10 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <small>Feuille de route</small>
-            <h2>Une V1 crédible maintenant, puis validation, puis accélération.</h2>
+            <small id="roadmapLabel">Feuille de route</small>
+            <h2 id="roadmapTitle">Une V1 crédible maintenant, puis validation, puis accélération.</h2>
           </div>
-          <p>
+          <p id="roadmapCopy">
             Le projet doit grandir avec discipline : mesurer, améliorer, densifier, puis seulement élargir.
           </p>
         </div>
@@ -1335,9 +1476,9 @@
         <div class="roadmap">
           <article class="roadmap-card">
             <div class="roadmap-number">1</div>
-            <h3>V1 simple, belle et crédible</h3>
-            <ul>
-              <li>Une seule langue : français</li>
+            <h3 id="roadmapOneTitle">V1 simple, belle et crédible</h3>
+            <ul id="roadmapOneList">
+              <li>Bilingue dès le lancement : français + anglais</li>
               <li>3 zones prioritaires : Lisbonne, Porto, Algarve</li>
               <li>5 catégories maximum</li>
               <li>30 à 50 fiches lieux</li>
@@ -1347,8 +1488,8 @@
 
           <article class="roadmap-card">
             <div class="roadmap-number">2</div>
-            <h3>Validation du modèle</h3>
-            <ul>
+            <h3 id="roadmapTwoTitle">Validation du modèle</h3>
+            <ul id="roadmapTwoList">
               <li>Suivre les recherches, clics et consultations</li>
               <li>Améliorer les pages les plus prometteuses</li>
               <li>Densifier les zones qui convertissent</li>
@@ -1359,12 +1500,12 @@
 
           <article class="roadmap-card">
             <div class="roadmap-number">3</div>
-            <h3>Accélération</h3>
-            <ul>
-              <li>Devenir une référence francophone sur le Portugal</li>
+            <h3 id="roadmapThreeTitle">Accélération</h3>
+            <ul id="roadmapThreeList">
+              <li>Devenir une référence premium FR + EN sur le Portugal</li>
               <li>Ouvrir de nouvelles zones et catégories</li>
               <li>Lancer sponsorings et visibilité pro</li>
-              <li>Préparer d’autres langues</li>
+              <li>Affiner les partenariats hôtels, rooftops et expériences</li>
               <li>Étendre le modèle à d’autres destinations</li>
             </ul>
           </article>
@@ -1376,15 +1517,15 @@
       <div class="container">
         <div class="footer-cta">
           <div>
-            <h2>Une maquette pensée pour convaincre un client, pas juste “faire joli”.</h2>
-            <p>
+            <h2 id="footerCtaTitle">Une maquette pensée pour convaincre un client, pas juste “faire joli”.</h2>
+            <p id="footerCtaCopy">
               Recherche, carte, catégories, fiches, SEO, conversion, affiliation, zones prioritaires,
               éditorial premium et structure produit cohérente : tout est aligné avec le dossier de présentation.
             </p>
           </div>
           <div class="cta-actions">
-            <button class="btn btn-primary" onclick="scrollToSection('explorer')">Voir les lieux</button>
-            <button class="btn btn-soft" onclick="scrollToSection('guides')">Voir les guides</button>
+            <button class="btn btn-primary" onclick="scrollToSection('explorer')" id="footerCtaOne">Voir les lieux</button>
+            <button class="btn btn-soft" onclick="scrollToSection('guides')" id="footerCtaTwo">Voir les guides</button>
           </div>
         </div>
       </div>
@@ -1393,8 +1534,8 @@
 
   <footer class="footer">
     <div class="container footer-inner">
-      <div><strong>ClickPortugal</strong> - Guide premium du Portugal</div>
-      <div>V1 maquette homepage - Lisbonne, Porto, Algarve - FR</div>
+      <div><strong>ClickPortugal</strong> - <span id="footerBrand">Guide premium du Portugal</span></div>
+      <div id="footerVersion">V1 maquette homepage - Lisbonne, Porto, Algarve - FR / EN</div>
     </div>
   </footer>
 
@@ -1409,26 +1550,26 @@
 
         <div class="detail-list">
           <div class="detail-item">
-            <strong>Pourquoi on aime</strong>
+            <strong id="modalLoveLabel">Pourquoi on aime</strong>
             <span id="modalLove"></span>
           </div>
           <div class="detail-item">
-            <strong>Pour qui</strong>
+            <strong id="modalForLabel">Pour qui</strong>
             <span id="modalFor"></span>
           </div>
           <div class="detail-item">
-            <strong>Infos pratiques</strong>
+            <strong id="modalInfoLabel">Infos pratiques</strong>
             <span id="modalInfo"></span>
           </div>
           <div class="detail-item">
-            <strong>Lien utile / action</strong>
+            <strong id="modalActionLabel">Lien utile / action</strong>
             <span id="modalAction"></span>
           </div>
         </div>
 
         <div class="floating-actions">
-          <button class="btn btn-primary" onclick="alert('CTA réservation / affiliation')">Réserver</button>
-          <button class="btn btn-soft" onclick="alert('CTA lieux similaires')">Voir les lieux similaires</button>
+          <button class="btn btn-gold" id="modalPrimaryCta" onclick="triggerAffiliateCTA()">Réserver maintenant</button>
+          <button class="btn btn-soft" id="modalSecondaryCta" onclick="alert(translations[currentLang].alerts.similar)">Voir les lieux similaires</button>
         </div>
       </div>
     </div>
@@ -1438,172 +1579,608 @@
     const places = [
       {
         id: 1,
-        title: "Seen Sky Bar",
+        title: { fr: "Seen Sky Bar", en: "Seen Sky Bar" },
         city: "Lisbonne",
         category: "Rooftops",
         price: "€€€",
-        district: "Avenida da Liberdade",
-        tag: "Vue panoramique",
-        description: "Rooftop premium avec ambiance chic, vue sur Lisbonne et vraie promesse sunset.",
-        love: "L’atmosphère, la vue, le positionnement premium et le potentiel conversion réservation.",
-        forWho: "Couples, city break, amateurs de rooftops, week-end premium.",
-        info: "Adresse centrale - Réservation conseillée - Excellent en fin de journée.",
-        action: "Réserver une table / découvrir les rooftops similaires.",
-        badge: "Idéal sunset"
+        district: { fr: "Avenida da Liberdade", en: "Avenida da Liberdade" },
+        tag: { fr: "Vue panoramique", en: "Panoramic views" },
+        description: {
+          fr: "Rooftop premium avec ambiance chic, vue sur Lisbonne et vraie promesse sunset.",
+          en: "Premium rooftop with a chic atmosphere, Lisbon views and a strong sunset appeal."
+        },
+        love: {
+          fr: "L’atmosphère, la vue, le positionnement premium et le potentiel conversion réservation.",
+          en: "The atmosphere, the views, the premium positioning and the reservation potential."
+        },
+        forWho: {
+          fr: "Couples, city break, amateurs de rooftops, week-end premium.",
+          en: "Couples, city breaks, rooftop lovers and premium weekend travelers."
+        },
+        info: {
+          fr: "Adresse centrale - Réservation conseillée - Excellent en fin de journée.",
+          en: "Central address - Booking recommended - Best enjoyed late afternoon."
+        },
+        action: {
+          fr: "Réserver une table / découvrir les rooftops similaires.",
+          en: "Book a table / discover similar rooftops."
+        },
+        badge: { fr: "Idéal sunset", en: "Best for sunset" },
+        cta: { fr: "Réserver une table", en: "Book a table" }
       },
       {
         id: 2,
-        title: "Palácio Chiado",
+        title: { fr: "Palácio Chiado", en: "Palácio Chiado" },
         city: "Lisbonne",
         category: "Restaurants",
         price: "€€€",
-        district: "Chiado",
-        tag: "Adresse iconique",
-        description: "Restaurant élégant dans un lieu remarquable, parfait pour une sélection éditoriale forte.",
-        love: "Le lieu, la mise en scène, la valeur éditoriale et le potentiel partenaire.",
-        forWho: "Dîners élégants, voyageurs premium, adresses signature.",
-        info: "Quartier central - Très bon pour enrichir les contenus city guide.",
-        action: "Voir la fiche / réserver / lire la sélection restaurants Lisbonne.",
-        badge: "Sélection premium"
+        district: { fr: "Chiado", en: "Chiado" },
+        tag: { fr: "Adresse iconique", en: "Iconic address" },
+        description: {
+          fr: "Restaurant élégant dans un lieu remarquable, parfait pour une sélection éditoriale forte.",
+          en: "Elegant restaurant in a remarkable venue, perfect for a strong editorial selection."
+        },
+        love: {
+          fr: "Le lieu, la mise en scène, la valeur éditoriale et le potentiel partenaire.",
+          en: "The venue, the staging, the editorial value and the partnership potential."
+        },
+        forWho: {
+          fr: "Dîners élégants, voyageurs premium, adresses signature.",
+          en: "Elegant dinners, premium travelers and signature dining lovers."
+        },
+        info: {
+          fr: "Quartier central - Très bon pour enrichir les contenus city guide.",
+          en: "Central district - Great for enriching city guide content."
+        },
+        action: {
+          fr: "Voir la fiche / réserver / lire la sélection restaurants Lisbonne.",
+          en: "View listing / reserve / read the Lisbon restaurant selection."
+        },
+        badge: { fr: "Sélection premium", en: "Premium pick" },
+        cta: { fr: "Réserver une table", en: "Reserve a table" }
       },
       {
         id: 3,
-        title: "Torel Avantgarde",
+        title: { fr: "Torel Avantgarde", en: "Torel Avantgarde" },
         city: "Porto",
         category: "Hôtels",
         price: "€€€€",
-        district: "Miragaia",
-        tag: "Boutique hôtel",
-        description: "Hôtel design avec vue, spa et très fort potentiel affiliation travel.",
-        love: "Le niveau de standing, l’esthétique du lieu et la valeur transactionnelle.",
-        forWho: "Séjours haut de gamme, couples, escapades longues.",
-        info: "Belle adresse à mettre en avant dans “où dormir à Porto”.",
-        action: "Voir les chambres / comparer avec d’autres hôtels Porto.",
-        badge: "Affiliation hotel"
+        district: { fr: "Miragaia", en: "Miragaia" },
+        tag: { fr: "Boutique hôtel", en: "Boutique hotel" },
+        description: {
+          fr: "Hôtel design avec vue, spa et très fort potentiel affiliation travel.",
+          en: "Design hotel with views, spa and strong travel affiliation potential."
+        },
+        love: {
+          fr: "Le niveau de standing, l’esthétique du lieu et la valeur transactionnelle.",
+          en: "The level of comfort, the aesthetic and the transactional value."
+        },
+        forWho: {
+          fr: "Séjours haut de gamme, couples, escapades longues.",
+          en: "High-end stays, couples and longer escapes."
+        },
+        info: {
+          fr: "Belle adresse à mettre en avant dans “où dormir à Porto”.",
+          en: "A strong property to highlight in “where to stay in Porto”."
+        },
+        action: {
+          fr: "Voir les chambres / comparer avec d’autres hôtels Porto.",
+          en: "Check rooms / compare with other Porto hotels."
+        },
+        badge: { fr: "Affiliation hôtel", en: "Hotel affiliate" },
+        cta: { fr: "Vérifier les disponibilités", en: "Check availability" }
       },
       {
         id: 4,
-        title: "The Yeatman",
+        title: { fr: "The Yeatman", en: "The Yeatman" },
         city: "Porto",
         category: "Hôtels",
         price: "€€€€",
-        district: "Vila Nova de Gaia",
-        tag: "Luxe & panorama",
-        description: "Adresse emblématique avec vue sur Porto, idéale pour renforcer la crédibilité premium.",
-        love: "Le prestige, la vue et le positionnement très haut de gamme.",
-        forWho: "Voyages premium, anniversaires, séjours d’exception.",
-        info: "Très bon candidat pour fiches fortes et comparatifs quartiers/hôtels.",
-        action: "Réserver / comparer / lire le guide Porto.",
-        badge: "Luxe iconique"
+        district: { fr: "Vila Nova de Gaia", en: "Vila Nova de Gaia" },
+        tag: { fr: "Luxe & panorama", en: "Luxury & panorama" },
+        description: {
+          fr: "Adresse emblématique avec vue sur Porto, idéale pour renforcer la crédibilité premium.",
+          en: "Emblematic address with Porto views, ideal to reinforce the premium positioning."
+        },
+        love: {
+          fr: "Le prestige, la vue et le positionnement très haut de gamme.",
+          en: "The prestige, the views and the ultra premium positioning."
+        },
+        forWho: {
+          fr: "Voyages premium, anniversaires, séjours d’exception.",
+          en: "Premium trips, celebrations and exceptional stays."
+        },
+        info: {
+          fr: "Très bon candidat pour fiches fortes et comparatifs quartiers/hôtels.",
+          en: "Great candidate for strong listings and hotel comparison content."
+        },
+        action: {
+          fr: "Réserver / comparer / lire le guide Porto.",
+          en: "Book / compare / read the Porto guide."
+        },
+        badge: { fr: "Luxe iconique", en: "Iconic luxury" },
+        cta: { fr: "Vérifier les disponibilités", en: "Check availability" }
       },
       {
         id: 5,
-        title: "Praia da Marinha",
+        title: { fr: "Praia da Marinha", en: "Praia da Marinha" },
         city: "Algarve",
         category: "Plages",
         price: "Gratuit",
-        district: "Lagoa",
-        tag: "Incontournable",
-        description: "Plage emblématique de l’Algarve, parfaite pour contenu SEO fort et sélection visuelle.",
-        love: "Le décor, l’impact visuel et le pouvoir d’attraction dans les recherches.",
-        forWho: "Vacances mer, road trips, lecteurs en phase inspiration.",
-        info: "Mieux en matinée - utile de prévoir accès, parking et conseils sur place.",
-        action: "Voir la fiche / découvrir les plus belles plages de l’Algarve.",
-        badge: "Spot iconique"
+        district: { fr: "Lagoa", en: "Lagoa" },
+        tag: { fr: "Incontournable", en: "Must-see" },
+        description: {
+          fr: "Plage emblématique de l’Algarve, parfaite pour contenu SEO fort et sélection visuelle.",
+          en: "Iconic Algarve beach, perfect for strong SEO content and visual storytelling."
+        },
+        love: {
+          fr: "Le décor, l’impact visuel et le pouvoir d’attraction dans les recherches.",
+          en: "The scenery, the visual impact and the search appeal."
+        },
+        forWho: {
+          fr: "Vacances mer, road trips, lecteurs en phase inspiration.",
+          en: "Beach holidays, road trips and inspiration-phase travelers."
+        },
+        info: {
+          fr: "Mieux en matinée - utile de prévoir accès, parking et conseils sur place.",
+          en: "Best in the morning - useful to include access, parking and local tips."
+        },
+        action: {
+          fr: "Voir la fiche / découvrir les plus belles plages de l’Algarve.",
+          en: "View listing / discover the most beautiful Algarve beaches."
+        },
+        badge: { fr: "Spot iconique", en: "Iconic spot" },
+        cta: { fr: "Voir le guide", en: "View guide" }
       },
       {
         id: 6,
-        title: "Benagil Boat Experience",
+        title: { fr: "Benagil Boat Experience", en: "Benagil Boat Experience" },
         city: "Algarve",
         category: "Activités",
         price: "€€",
-        district: "Benagil",
-        tag: "Réservation directe",
-        description: "Excursion monétisable idéale pour lancer l’affiliation activités dès la V1.",
-        love: "Le potentiel de commission, l’intention forte et la clarté du CTA.",
-        forWho: "Voyageurs actifs, couples, familles, excursion journée.",
-        info: "Bonne fiche pour lier plage + activité + article pratique.",
-        action: "Réserver l’activité / voir les expériences similaires.",
-        badge: "Affiliation activité"
+        district: { fr: "Benagil", en: "Benagil" },
+        tag: { fr: "Réservation directe", en: "Direct booking" },
+        description: {
+          fr: "Excursion monétisable idéale pour lancer l’affiliation activités dès la V1.",
+          en: "A highly monetizable excursion, ideal for launching activity affiliation from V1."
+        },
+        love: {
+          fr: "Le potentiel de commission, l’intention forte et la clarté du CTA.",
+          en: "The commission potential, high intent and CTA clarity."
+        },
+        forWho: {
+          fr: "Voyageurs actifs, couples, familles, excursion journée.",
+          en: "Active travelers, couples, families and day-trip seekers."
+        },
+        info: {
+          fr: "Bonne fiche pour lier plage + activité + article pratique.",
+          en: "Great listing to connect beach + activity + practical content."
+        },
+        action: {
+          fr: "Réserver l’activité / voir les expériences similaires.",
+          en: "Book the activity / see similar experiences."
+        },
+        badge: { fr: "Affiliation activité", en: "Activity affiliate" },
+        cta: { fr: "Découvrir l’expérience", en: "Discover the experience" }
       },
       {
         id: 7,
-        title: "Ponto Final",
+        title: { fr: "Ponto Final", en: "Ponto Final" },
         city: "Lisbonne",
         category: "Restaurants",
         price: "€€",
-        district: "Almada",
-        tag: "Vue sur le Tage",
-        description: "Table très recherchée pour son emplacement, excellente pour guides et comparatifs.",
-        love: "Le décor, la désirabilité et la force des recherches naturelles.",
-        forWho: "Déjeuners vue mer, dîner en couple, expérience Lisbonne iconique.",
-        info: "Très utile à relier aux guides “meilleurs restaurants avec vue”.",
-        action: "Voir la fiche / réserver / lire le guide Lisbonne.",
-        badge: "Vue iconique"
+        district: { fr: "Almada", en: "Almada" },
+        tag: { fr: "Vue sur le Tage", en: "River view" },
+        description: {
+          fr: "Table très recherchée pour son emplacement, excellente pour guides et comparatifs.",
+          en: "Highly sought-after spot for its location, excellent for guides and comparisons."
+        },
+        love: {
+          fr: "Le décor, la désirabilité et la force des recherches naturelles.",
+          en: "The setting, desirability and strong organic demand."
+        },
+        forWho: {
+          fr: "Déjeuners vue mer, dîner en couple, expérience Lisbonne iconique.",
+          en: "Waterfront lunches, romantic dinners and iconic Lisbon experiences."
+        },
+        info: {
+          fr: "Très utile à relier aux guides “meilleurs restaurants avec vue”.",
+          en: "Great to connect with ‘best restaurants with a view’ content."
+        },
+        action: {
+          fr: "Voir la fiche / réserver / lire le guide Lisbonne.",
+          en: "View listing / reserve / read the Lisbon guide."
+        },
+        badge: { fr: "Vue iconique", en: "Iconic view" },
+        cta: { fr: "Réserver une table", en: "Book a table" }
       },
       {
         id: 8,
-        title: "Douro River Cruise",
+        title: { fr: "Douro River Cruise", en: "Douro River Cruise" },
         city: "Porto",
         category: "Activités",
         price: "€€",
-        district: "Ribeira",
-        tag: "Expérience phare",
-        description: "Activité claire, populaire et naturelle pour une logique de conversion.",
-        love: "L’intention utilisateur est très mature, donc très bonne pour la réservation.",
-        forWho: "Première visite, city break, visiteurs court séjour.",
-        info: "Excellente entrée pour affiliation activité à Porto.",
-        action: "Réserver la croisière / lire les meilleures activités Porto.",
-        badge: "Conversion forte"
+        district: { fr: "Ribeira", en: "Ribeira" },
+        tag: { fr: "Expérience phare", en: "Top experience" },
+        description: {
+          fr: "Activité claire, populaire et naturelle pour une logique de conversion.",
+          en: "Clear, popular and naturally conversion-friendly activity."
+        },
+        love: {
+          fr: "L’intention utilisateur est très mature, donc très bonne pour la réservation.",
+          en: "User intent is very mature, making it excellent for bookings."
+        },
+        forWho: {
+          fr: "Première visite, city break, visiteurs court séjour.",
+          en: "First-time visitors, city breaks and short-stay travelers."
+        },
+        info: {
+          fr: "Excellente entrée pour affiliation activité à Porto.",
+          en: "Excellent entry point for activity affiliation in Porto."
+        },
+        action: {
+          fr: "Réserver la croisière / lire les meilleures activités Porto.",
+          en: "Book the cruise / read the best Porto activities."
+        },
+        badge: { fr: "Conversion forte", en: "High conversion" },
+        cta: { fr: "Découvrir l’expérience", en: "Discover the experience" }
       },
       {
         id: 9,
-        title: "Memmo Príncipe Real",
+        title: { fr: "Memmo Príncipe Real", en: "Memmo Príncipe Real" },
         city: "Lisbonne",
         category: "Hôtels",
         price: "€€€€",
-        district: "Príncipe Real",
-        tag: "Design & quartier",
-        description: "Bon hôtel premium pour nourrir les pages quartier, hôtel et city guide.",
-        love: "L’équilibre entre design, emplacement et potentiel affiliation.",
-        forWho: "City breaks premium, couples, voyageurs design.",
-        info: "Très bon candidat pour “où dormir à Lisbonne”.",
-        action: "Réserver / voir les hôtels similaires / lire le guide quartier.",
-        badge: "Design hotel"
+        district: { fr: "Príncipe Real", en: "Príncipe Real" },
+        tag: { fr: "Design & quartier", en: "Design & district" },
+        description: {
+          fr: "Bon hôtel premium pour nourrir les pages quartier, hôtel et city guide.",
+          en: "Strong premium hotel to support district pages, hotel pages and city guide content."
+        },
+        love: {
+          fr: "L’équilibre entre design, emplacement et potentiel affiliation.",
+          en: "The balance between design, location and affiliate potential."
+        },
+        forWho: {
+          fr: "City breaks premium, couples, voyageurs design.",
+          en: "Premium city breaks, couples and design-conscious travelers."
+        },
+        info: {
+          fr: "Très bon candidat pour “où dormir à Lisbonne”.",
+          en: "A strong candidate for ‘where to stay in Lisbon’."
+        },
+        action: {
+          fr: "Réserver / voir les hôtels similaires / lire le guide quartier.",
+          en: "Book / see similar hotels / read the district guide."
+        },
+        badge: { fr: "Design hotel", en: "Design hotel" },
+        cta: { fr: "Vérifier les disponibilités", en: "Check availability" }
       }
     ];
 
+    const translations = {
+      fr: {
+        pageTitle: "ClickPortugal - Guide premium du Portugal",
+        brandKicker: "Guide digital premium",
+        navCategories: "Catégories",
+        navDestinations: "Carte",
+        navExplorer: "Explorer",
+        navGuides: "Guides",
+        navConcept: "Concept",
+        topbarCta: "Voir les adresses",
+        heroEyebrow: "Portugal premium city guide",
+        heroTitle: "La recherche et la carte au centre de l’expérience.",
+        heroCopy: "Un city guide premium inspiré d’Airbnb et Google Maps, pensé pour découvrir, filtrer et réserver les meilleures adresses du Portugal avec une approche luxe et lifestyle.",
+        searchHeadLabel: "Recherche premium",
+        searchHeadTitle: "Tape une envie, filtre, puis laisse la carte répondre.",
+        searchHeadNote: "Exemple : si l’utilisateur tape “rooftop”, seuls les rooftops restent visibles sur la carte et dans les fiches.",
+        labelSearch: "Recherche",
+        labelCategory: "Catégorie",
+        labelDestination: "Destination",
+        searchPlaceholder: "Rooftop, hôtel, plage, activité, quartier...",
+        searchCta: "Explorer",
+        insightOne: "Bilingue dès la V1 pour doubler l’audience potentielle.",
+        insightTwo: "CTA intégrés avec élégance dans chaque fiche lieu.",
+        insightThree: "Un rendu premium, sobre et orienté conversion.",
+        conversionNote: "La fiche lieu ne doit pas ressembler à une pub : elle doit donner envie, rassurer, puis amener naturellement à “Réserver une table”, “Vérifier les disponibilités” ou “Découvrir l’expérience”.",
+        mapLabel: "Différenciateur UX",
+        mapTitle: "Carte interactive filtrée en temps réel",
+        mapPill: "Affiliation prête dès la V1",
+        categoriesLabel: "Architecture produit V1",
+        categoriesTitle: "5 catégories maximum pour une base simple, lisible et crédible.",
+        categoriesCopy: "Le site doit rester clair au lancement, tout en étant assez fort pour soutenir la découverte, le SEO, la navigation interne et la monétisation.",
+        catHotelsDesc: "Boutique hôtels, design stays, adresses premium, quartiers où dormir.",
+        catRestaurantsDesc: "Tables signature, bonnes adresses locales, spots élégants et sélections utiles.",
+        catRooftopsDesc: "Les meilleurs spots coucher de soleil, cocktails et vues iconiques.",
+        catActivitiesDesc: "Excursions, transferts, expériences et réservations monétisables dès la V1.",
+        catBeachesDesc: "Spots iconiques, criques premium, plages accessibles et sélections régionales.",
+        exploreLink: "Explorer →",
+        editorialLabel: "Positionnement éditorial",
+        editorialTitle: "Un média éditorial, un moteur de découverte et une plateforme de bonnes adresses.",
+        editorialCopy: "Le design doit soutenir les contenus à forte valeur ajoutée, le maillage SEO, la recherche, la carte, les lieux similaires et les intentions de réservation, sans jamais ressembler à un blog générique.",
+        guideTag: "Guide",
+        comparisonTag: "Comparatif",
+        selectionTag: "Sélection",
+        itineraryTag: "Itinéraire",
+        guideItemOne: "Les meilleurs rooftops de Lisbonne",
+        guideItemTwo: "Où dormir à Porto : 7 quartiers à comparer",
+        guideItemThree: "Les plus belles plages de l’Algarve",
+        guideItemFour: "Portugal premium : 4 jours entre city break et mer",
+        businessLabel: "Business model",
+        businessTitle: "Pensé comme un produit rentable, pas comme une accumulation de pages.",
+        businessOneTitle: "Affiliation activités",
+        businessOneCopy: "Excursions, billets, transferts, expériences. Monétisation prioritaire dès la V1.",
+        businessTwoTitle: "Affiliation travel",
+        businessTwoCopy: "Hôtels, voiture, services voyage et comparateurs après validation.",
+        businessThreeTitle: "Contenus sponsorisés",
+        businessThreeCopy: "Mises en avant premium une fois la crédibilité installée.",
+        businessFourTitle: "Listings premium",
+        businessFourCopy: "Visibilité renforcée pour établissements partenaires et adresses phares.",
+        businessHighlight: "Chaque bloc doit améliorer la compréhension du site, l’expérience utilisateur et la capacité à générer du revenu.",
+        exploreLabel: "Explorer les lieux",
+        exploreTitle: "Des fiches standardisées qui inspirent, rassurent et convertissent.",
+        exploreCopy: "Chaque fiche met en avant : nom, ville, quartier, gamme de prix, pour qui, pourquoi on aime, conseils utiles, lieux similaires et action de réservation.",
+        tabAll: "Toutes",
+        emptyState: "Aucun lieu ne correspond à ce filtre. Essaie une autre combinaison de recherche, de catégorie ou de destination.",
+        guidesLabel: "Guides à forte valeur ajoutée",
+        guidesTitle: "Le contenu éditorial doit nourrir le SEO, la navigation et la conversion.",
+        guidesCopy: "Articles utiles, comparatifs, sélections, itinéraires et guides pratiques pour capter les intentions concrètes et faire circuler naturellement l’utilisateur entre articles, catégories, villes et fiches lieux.",
+        seoItineraryLabel: "Itinéraire",
+        seoOneTitle: "Les meilleurs rooftops de Lisbonne",
+        seoOneCopy: "Page éditoriale forte avec lieux sélectionnés, carte, filtres et CTA réservation.",
+        seoTwoTitle: "Où dormir à Porto : les meilleurs quartiers",
+        seoTwoCopy: "Comparatif utile pour capter l’intention, mailler les hôtels et rassurer avant conversion.",
+        seoThreeTitle: "Les plus belles plages de l’Algarve",
+        seoThreeCopy: "Article inspiration + praticité + sélection de lieux similaires et conseils d’accès.",
+        seoFourTitle: "Portugal premium : city break, mer et expériences",
+        seoFourCopy: "Format éditorial parfait pour relier activités, hôtels et destinations phares.",
+        seeArticle: "Voir l’article",
+        roadmapLabel: "Feuille de route",
+        roadmapTitle: "Une V1 crédible maintenant, puis validation, puis accélération.",
+        roadmapCopy: "Le projet doit grandir avec discipline : mesurer, améliorer, densifier, puis seulement élargir.",
+        roadmapOneTitle: "V1 simple, belle et crédible",
+        roadmapOneList: [
+          "Bilingue dès le lancement : français + anglais",
+          "3 zones prioritaires : Lisbonne, Porto, Algarve",
+          "5 catégories maximum",
+          "30 à 50 fiches lieux",
+          "15 à 20 articles forts"
+        ],
+        roadmapTwoTitle: "Validation du modèle",
+        roadmapTwoList: [
+          "Suivre les recherches, clics et consultations",
+          "Améliorer les pages les plus prometteuses",
+          "Densifier les zones qui convertissent",
+          "Renforcer le maillage interne",
+          "Fluidifier la monétisation"
+        ],
+        roadmapThreeTitle: "Accélération",
+        roadmapThreeList: [
+          "Devenir une référence premium FR + EN sur le Portugal",
+          "Ouvrir de nouvelles zones et catégories",
+          "Lancer sponsorings et visibilité pro",
+          "Affiner les partenariats hôtels, rooftops et expériences",
+          "Étendre le modèle à d’autres destinations"
+        ],
+        footerCtaTitle: "Une maquette pensée pour convaincre un client, pas juste “faire joli”.",
+        footerCtaCopy: "Recherche, carte, catégories, fiches, SEO, conversion, affiliation, zones prioritaires, éditorial premium et structure produit cohérente : tout est aligné avec le dossier de présentation.",
+        footerCtaOne: "Voir les lieux",
+        footerCtaTwo: "Voir les guides",
+        footerBrand: "Guide premium du Portugal",
+        footerVersion: "V1 maquette homepage - Lisbonne, Porto, Algarve - FR / EN",
+        modalLoveLabel: "Pourquoi on aime",
+        modalForLabel: "Pour qui",
+        modalInfoLabel: "Infos pratiques",
+        modalActionLabel: "Lien utile / action",
+        modalSecondaryCta: "Voir les lieux similaires",
+        allLabel: "Toutes",
+        categories: {
+          "Hôtels": "Hôtels",
+          "Restaurants": "Restaurants",
+          "Rooftops": "Rooftops",
+          "Activités": "Activités",
+          "Plages": "Plages"
+        },
+        alerts: {
+          booking: "CTA affiliation / réservation",
+          similar: "CTA lieux similaires",
+          article1: "Maquette article SEO : meilleurs rooftops de Lisbonne",
+          article2: "Maquette article SEO : où dormir à Porto",
+          article3: "Maquette article SEO : plages Algarve",
+          article4: "Maquette article SEO : itinéraire premium"
+        }
+      },
+      en: {
+        pageTitle: "ClickPortugal - Premium Portugal Guide",
+        brandKicker: "Premium digital guide",
+        navCategories: "Categories",
+        navDestinations: "Map",
+        navExplorer: "Explore",
+        navGuides: "Guides",
+        navConcept: "Concept",
+        topbarCta: "See places",
+        heroEyebrow: "Portugal premium city guide",
+        heroTitle: "Search and map at the center of the experience.",
+        heroCopy: "A premium city guide inspired by Airbnb and Google Maps, built to discover, filter and book Portugal’s best places with a luxury lifestyle angle.",
+        searchHeadLabel: "Premium search",
+        searchHeadTitle: "Type a desire, filter it, then let the map answer.",
+        searchHeadNote: "Example: if the user types “rooftop”, only rooftops remain visible on the map and in the listings.",
+        labelSearch: "Search",
+        labelCategory: "Category",
+        labelDestination: "Destination",
+        searchPlaceholder: "Rooftop, hotel, beach, activity, neighborhood...",
+        searchCta: "Explore",
+        insightOne: "Bilingual from V1 to double the potential audience.",
+        insightTwo: "Elegant CTAs integrated naturally into every listing.",
+        insightThree: "A premium, refined interface built for conversion.",
+        conversionNote: "The listing should never feel like an ad: it should inspire, reassure, then lead naturally to “Book a table”, “Check availability” or “Discover the experience”.",
+        mapLabel: "UX differentiator",
+        mapTitle: "Interactive map filtered in real time",
+        mapPill: "Affiliate-ready from V1",
+        categoriesLabel: "V1 product architecture",
+        categoriesTitle: "5 categories maximum for a simple, clear and credible foundation.",
+        categoriesCopy: "The site must stay clear at launch while being strong enough to support discovery, SEO, internal navigation and monetization.",
+        catHotelsDesc: "Boutique hotels, design stays, premium addresses and district guides.",
+        catRestaurantsDesc: "Signature dining, elegant local spots and curated useful selections.",
+        catRooftopsDesc: "The best sunset spots, cocktails and iconic views.",
+        catActivitiesDesc: "Excursions, transfers, experiences and bookable offers from V1.",
+        catBeachesDesc: "Iconic spots, premium coves, accessible beaches and regional picks.",
+        exploreLink: "Explore →",
+        editorialLabel: "Editorial positioning",
+        editorialTitle: "An editorial media brand, a discovery engine and a curated place platform.",
+        editorialCopy: "The design must support high-value content, SEO linking, search, map usage, similar places and booking intent, without ever looking like a generic travel blog.",
+        guideTag: "Guide",
+        comparisonTag: "Comparison",
+        selectionTag: "Selection",
+        itineraryTag: "Itinerary",
+        guideItemOne: "The best rooftops in Lisbon",
+        guideItemTwo: "Where to stay in Porto: 7 districts to compare",
+        guideItemThree: "The most beautiful beaches in the Algarve",
+        guideItemFour: "Premium Portugal: 4 days between city break and sea",
+        businessLabel: "Business model",
+        businessTitle: "Built like a profitable product, not a pile of pages.",
+        businessOneTitle: "Activity affiliation",
+        businessOneCopy: "Excursions, tickets, transfers and experiences. Priority monetization from V1.",
+        businessTwoTitle: "Travel affiliation",
+        businessTwoCopy: "Hotels, car rental, travel services and comparison tools after validation.",
+        businessThreeTitle: "Sponsored content",
+        businessThreeCopy: "Premium placements once credibility is established.",
+        businessFourTitle: "Premium listings",
+        businessFourCopy: "Enhanced visibility for partners and standout venues.",
+        businessHighlight: "Every block should improve site understanding, user experience and revenue potential.",
+        exploreLabel: "Explore places",
+        exploreTitle: "Standardized listings that inspire, reassure and convert.",
+        exploreCopy: "Each listing highlights: name, city, district, price range, who it’s for, why we love it, useful tips, similar places and a booking action.",
+        tabAll: "All",
+        emptyState: "No places match this filter. Try another combination of search, category or destination.",
+        guidesLabel: "High-value guides",
+        guidesTitle: "Editorial content should fuel SEO, navigation and conversion.",
+        guidesCopy: "Useful articles, comparisons, curated picks, itineraries and practical guides designed to capture real intent and move users naturally between articles, categories, cities and listings.",
+        seoItineraryLabel: "Itinerary",
+        seoOneTitle: "The best rooftops in Lisbon",
+        seoOneCopy: "Strong editorial page with selected places, map, filters and booking CTAs.",
+        seoTwoTitle: "Where to stay in Porto: the best districts",
+        seoTwoCopy: "Helpful comparison to capture intent, connect hotels and reassure before conversion.",
+        seoThreeTitle: "The most beautiful beaches in the Algarve",
+        seoThreeCopy: "Inspiration + practical tips + similar places and access advice.",
+        seoFourTitle: "Premium Portugal: city break, sea and experiences",
+        seoFourCopy: "Ideal editorial format to connect activities, hotels and flagship destinations.",
+        seeArticle: "View article",
+        roadmapLabel: "Roadmap",
+        roadmapTitle: "A credible V1 now, then validation, then acceleration.",
+        roadmapCopy: "The project should grow with discipline: measure, improve, densify, then expand.",
+        roadmapOneTitle: "Simple, beautiful and credible V1",
+        roadmapOneList: [
+          "Bilingual from launch: French + English",
+          "3 priority zones: Lisbon, Porto, Algarve",
+          "5 categories maximum",
+          "30 to 50 place listings",
+          "15 to 20 strong editorial pages"
+        ],
+        roadmapTwoTitle: "Model validation",
+        roadmapTwoList: [
+          "Track searches, clicks and visits",
+          "Improve the most promising pages",
+          "Densify high-converting zones",
+          "Strengthen internal linking",
+          "Smooth monetization paths"
+        ],
+        roadmapThreeTitle: "Acceleration",
+        roadmapThreeList: [
+          "Become a premium FR + EN reference on Portugal",
+          "Open new zones and categories",
+          "Launch sponsorships and business visibility",
+          "Refine hotel, rooftop and experience partnerships",
+          "Extend the model to other destinations"
+        ],
+        footerCtaTitle: "A mockup built to convince a client, not just to look good.",
+        footerCtaCopy: "Search, map, categories, listings, SEO, conversion, affiliation, priority zones, premium editorial positioning and coherent product structure: everything is aligned with the presentation file.",
+        footerCtaOne: "See places",
+        footerCtaTwo: "See guides",
+        footerBrand: "Premium Portugal guide",
+        footerVersion: "Homepage mockup V1 - Lisbon, Porto, Algarve - FR / EN",
+        modalLoveLabel: "Why we love it",
+        modalForLabel: "Best for",
+        modalInfoLabel: "Practical info",
+        modalActionLabel: "Useful link / action",
+        modalSecondaryCta: "See similar places",
+        allLabel: "All",
+        categories: {
+          "Hôtels": "Hotels",
+          "Restaurants": "Restaurants",
+          "Rooftops": "Rooftops",
+          "Activités": "Activities",
+          "Plages": "Beaches"
+        },
+        alerts: {
+          booking: "Affiliate / booking CTA",
+          similar: "CTA similar places",
+          article1: "SEO article mockup: best rooftops in Lisbon",
+          article2: "SEO article mockup: where to stay in Porto",
+          article3: "SEO article mockup: Algarve beaches",
+          article4: "SEO article mockup: premium itinerary"
+        }
+      }
+    };
+
+    let currentLang = "fr";
     let currentCity = "";
     let currentCategory = "";
     let currentSearch = "";
+    let currentSelectedPlaceId = 1;
 
     const listingGrid = document.getElementById("listingGrid");
     const emptyState = document.getElementById("emptyState");
 
+    function getPlaceText(place, key){
+      const value = place[key];
+      if (typeof value === "object" && value !== null) {
+        return value[currentLang] || value.fr || "";
+      }
+      return value;
+    }
+
+    function getCategoryLabel(category){
+      return translations[currentLang].categories[category] || category;
+    }
+
+    function getPriceLabel(price){
+      if (currentLang === "en" && price === "Gratuit") return "Free";
+      return price;
+    }
+
+    function placeMatchesFilters(place){
+      const matchCity = !currentCity || place.city === currentCity;
+      const matchCategory = !currentCategory || place.category === currentCategory;
+
+      const haystack = [
+        getPlaceText(place, "title"),
+        place.city,
+        place.category,
+        getPlaceText(place, "district"),
+        getPlaceText(place, "tag"),
+        getPlaceText(place, "description"),
+        getPlaceText(place, "badge")
+      ].join(" ").toLowerCase();
+
+      const matchSearch = !currentSearch || haystack.includes(currentSearch.toLowerCase());
+      return matchCity && matchCategory && matchSearch;
+    }
+
+    function getFilteredPlaces(){
+      return places.filter(placeMatchesFilters);
+    }
+
     function renderPlaces() {
       listingGrid.innerHTML = "";
-
-      const filtered = places.filter(place => {
-        const matchCity = !currentCity || place.city === currentCity;
-        const matchCategory = !currentCategory || place.category === currentCategory;
-        const haystack = (
-          place.title + " " +
-          place.city + " " +
-          place.category + " " +
-          place.district + " " +
-          place.tag + " " +
-          place.description
-        ).toLowerCase();
-        const matchSearch = !currentSearch || haystack.includes(currentSearch.toLowerCase());
-        return matchCity && matchCategory && matchSearch;
-      });
+      const filtered = getFilteredPlaces();
 
       if (!filtered.length) {
         emptyState.style.display = "block";
-        return;
+      } else {
+        emptyState.style.display = "block" === "none";
+        emptyState.style.display = "none";
       }
-
-      emptyState.style.display = "none";
 
       filtered.forEach(place => {
         const card = document.createElement("article");
@@ -1613,32 +2190,74 @@
           <div class="listing-content">
             <div class="listing-top">
               <span class="listing-city">${place.city}</span>
-              <span class="price">${place.price}</span>
+              <span class="price">${getPriceLabel(place.price)}</span>
             </div>
 
-            <h3>${place.title}</h3>
+            <h3>${getPlaceText(place, "title")}</h3>
 
             <div class="listing-meta">
-              <span>${place.category}</span>
-              <span>${place.district}</span>
-              <span>${place.tag}</span>
+              <span>${getCategoryLabel(place.category)}</span>
+              <span>${getPlaceText(place, "district")}</span>
+              <span>${getPlaceText(place, "tag")}</span>
             </div>
 
-            <p class="listing-desc">${place.description}</p>
+            <p class="listing-desc">${getPlaceText(place, "description")}</p>
 
             <div class="listing-actions">
-              <button class="btn btn-primary" onclick="openPlaceById(${place.id})">Voir la fiche</button>
-              <button class="btn btn-soft" onclick="alert('CTA réservation / affiliation')">Réserver</button>
+              <button class="btn btn-primary" onclick="openPlaceById(${place.id})">${currentLang === "fr" ? "Voir la fiche" : "View listing"}</button>
+              <button class="btn btn-gold" onclick="openPlaceById(${place.id}); triggerAffiliateCTA();">${getPlaceText(place, "cta")}</button>
             </div>
           </div>
         `;
         listingGrid.appendChild(card);
       });
+
+      if (!filtered.length) {
+        listingGrid.innerHTML = "";
+      }
+
+      updateMapPins(filtered);
+      updateFloatingCard(filtered);
+    }
+
+    function updateMapPins(filteredPlaces){
+      const visibleIds = filteredPlaces.map(p => p.id);
+      document.querySelectorAll(".map-pin").forEach(pin => {
+        const id = Number(pin.dataset.id);
+        pin.classList.toggle("hidden", !visibleIds.includes(id));
+        pin.classList.toggle("active", id === currentSelectedPlaceId && visibleIds.includes(id));
+      });
+    }
+
+    function updateFloatingCard(filteredPlaces){
+      const featured = filteredPlaces.find(p => p.id === currentSelectedPlaceId) || filteredPlaces[0] || places[0];
+      currentSelectedPlaceId = featured.id;
+
+      const floatingCard = document.getElementById("floatingCard");
+      floatingCard.innerHTML = `
+        <div class="mini-meta">
+          <span>${featured.city}</span>
+          <span>${getCategoryLabel(featured.category)}</span>
+          <span>${getPriceLabel(featured.price)}</span>
+          <span>${getPlaceText(featured, "badge")}</span>
+        </div>
+        <h3>${getPlaceText(featured, "title")}</h3>
+        <p>${getPlaceText(featured, "description")}</p>
+        <div class="floating-actions">
+          <button class="btn btn-primary" onclick="openPlaceById(${featured.id})">${currentLang === "fr" ? "Voir la fiche" : "View listing"}</button>
+          <button class="btn btn-gold" onclick="openPlaceById(${featured.id}); triggerAffiliateCTA();">${getPlaceText(featured, "cta")}</button>
+        </div>
+      `;
+
+      document.querySelectorAll(".map-pin").forEach(pin => {
+        const id = Number(pin.dataset.id);
+        pin.classList.toggle("active", id === featured.id && !pin.classList.contains("hidden"));
+      });
     }
 
     function setActiveTab(buttons, activeText) {
       buttons.forEach(btn => {
-        const matches = btn.textContent.trim() === activeText || (activeText === "Toutes" && btn.textContent.trim() === "Toutes");
+        const matches = btn.textContent.trim() === activeText || (activeText === translations[currentLang].tabAll && btn.textContent.trim() === translations[currentLang].tabAll);
         btn.classList.toggle("active", matches);
       });
     }
@@ -1646,7 +2265,7 @@
     function filterByCity(city) {
       currentCity = city;
       document.getElementById("citySelect").value = city;
-      setActiveTab(document.querySelectorAll(".tab"), city || "Toutes");
+      setActiveTab(document.querySelectorAll(".tab"), city || translations[currentLang].tabAll);
       renderPlaces();
       scrollToSection("explorer");
     }
@@ -1665,12 +2284,11 @@
       document.getElementById("searchInput").value = "";
       document.getElementById("categorySelect").value = category;
       document.getElementById("citySelect").value = city;
-      setActiveTab(document.querySelectorAll(".tab"), city || "Toutes");
+      setActiveTab(document.querySelectorAll(".tab"), city || translations[currentLang].tabAll);
       renderPlaces();
-      scrollToSection("explorer");
 
       document.querySelectorAll(".tag").forEach(tag => tag.classList.remove("active"));
-      const clicked = Array.from(document.querySelectorAll(".tag")).find(t => t.textContent.includes(category) && t.textContent.includes(city));
+      const clicked = Array.from(document.querySelectorAll(".tag")).find(t => t.textContent.includes(city));
       if (clicked) clicked.classList.add("active");
     }
 
@@ -1678,9 +2296,8 @@
       currentSearch = document.getElementById("searchInput").value.trim();
       currentCategory = document.getElementById("categorySelect").value;
       currentCity = document.getElementById("citySelect").value;
-      setActiveTab(document.querySelectorAll(".tab"), currentCity || "Toutes");
+      setActiveTab(document.querySelectorAll(".tab"), currentCity || translations[currentLang].tabAll);
       renderPlaces();
-      scrollToSection("explorer");
     }
 
     function scrollToSection(id) {
@@ -1692,40 +2309,33 @@
       const place = places.find(p => p.id === id);
       if (!place) return;
 
-      document.getElementById("modalTitle").textContent = place.title;
-      document.getElementById("modalDesc").textContent = place.description;
-      document.getElementById("modalLove").textContent = place.love;
-      document.getElementById("modalFor").textContent = place.forWho;
-      document.getElementById("modalInfo").textContent = place.info;
-      document.getElementById("modalAction").textContent = place.action;
+      currentSelectedPlaceId = place.id;
+
+      document.getElementById("modalTitle").textContent = getPlaceText(place, "title");
+      document.getElementById("modalDesc").textContent = getPlaceText(place, "description");
+      document.getElementById("modalLove").textContent = getPlaceText(place, "love");
+      document.getElementById("modalFor").textContent = getPlaceText(place, "forWho");
+      document.getElementById("modalInfo").textContent = getPlaceText(place, "info");
+      document.getElementById("modalAction").textContent = getPlaceText(place, "action");
+      document.getElementById("modalPrimaryCta").textContent = getPlaceText(place, "cta");
 
       const modalMeta = document.getElementById("modalMeta");
       modalMeta.innerHTML = `
         <span>${place.city}</span>
-        <span>${place.category}</span>
-        <span>${place.price}</span>
-        <span>${place.district}</span>
-        <span>${place.badge}</span>
+        <span>${getCategoryLabel(place.category)}</span>
+        <span>${getPriceLabel(place.price)}</span>
+        <span>${getPlaceText(place, "district")}</span>
+        <span>${getPlaceText(place, "badge")}</span>
       `;
 
-      const floatingCard = document.getElementById("floatingCard");
-      floatingCard.innerHTML = `
-        <div class="mini-meta">
-          <span>${place.city}</span>
-          <span>${place.category}</span>
-          <span>${place.price}</span>
-          <span>${place.badge}</span>
-        </div>
-        <h3>${place.title}</h3>
-        <p>${place.description}</p>
-        <div class="floating-actions">
-          <button class="btn btn-primary" onclick="openPlaceById(${place.id})">Voir la fiche</button>
-          <button class="btn btn-soft" onclick="alert('CTA réservation / affiliation')">Réserver</button>
-        </div>
-      `;
+      updateFloatingCard(getFilteredPlaces());
 
       document.getElementById("placeModal").classList.add("open");
       document.body.style.overflow = "hidden";
+    }
+
+    function triggerAffiliateCTA(){
+      alert(translations[currentLang].alerts.booking);
     }
 
     function closeModal(event) {
@@ -1739,12 +2349,149 @@
       document.body.style.overflow = "";
     }
 
+    function setListItems(ulId, items){
+      const ul = document.getElementById(ulId);
+      ul.innerHTML = items.map(item => `<li>${item}</li>`).join("");
+    }
+
+    function setLanguage(lang){
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.title = translations[lang].pageTitle;
+
+      document.querySelectorAll(".lang-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.textContent.toLowerCase() === lang);
+      });
+
+      const t = translations[lang];
+
+      document.getElementById("brandKicker").textContent = t.brandKicker;
+      document.getElementById("navCategories").textContent = t.navCategories;
+      document.getElementById("navDestinations").textContent = t.navDestinations;
+      document.getElementById("navExplorer").textContent = t.navExplorer;
+      document.getElementById("navGuides").textContent = t.navGuides;
+      document.getElementById("navConcept").textContent = t.navConcept;
+      document.getElementById("topbarCta").textContent = t.topbarCta;
+      document.getElementById("heroEyebrow").textContent = t.heroEyebrow;
+      document.getElementById("heroTitle").textContent = t.heroTitle;
+      document.getElementById("heroCopy").textContent = t.heroCopy;
+      document.getElementById("searchHeadLabel").textContent = t.searchHeadLabel;
+      document.getElementById("searchHeadTitle").textContent = t.searchHeadTitle;
+      document.getElementById("searchHeadNote").textContent = t.searchHeadNote;
+      document.getElementById("labelSearch").textContent = t.labelSearch;
+      document.getElementById("labelCategory").textContent = t.labelCategory;
+      document.getElementById("labelDestination").textContent = t.labelDestination;
+      document.getElementById("searchInput").placeholder = t.searchPlaceholder;
+      document.getElementById("searchCta").textContent = t.searchCta;
+      document.getElementById("insightOne").textContent = t.insightOne;
+      document.getElementById("insightTwo").textContent = t.insightTwo;
+      document.getElementById("insightThree").textContent = t.insightThree;
+      document.getElementById("conversionNote").textContent = t.conversionNote;
+      document.getElementById("mapLabel").textContent = t.mapLabel;
+      document.getElementById("mapTitle").textContent = t.mapTitle;
+      document.getElementById("mapPill").textContent = t.mapPill;
+      document.getElementById("categoriesLabel").textContent = t.categoriesLabel;
+      document.getElementById("categoriesTitle").textContent = t.categoriesTitle;
+      document.getElementById("categoriesCopy").textContent = t.categoriesCopy;
+      document.getElementById("catHotelsDesc").textContent = t.catHotelsDesc;
+      document.getElementById("catRestaurantsDesc").textContent = t.catRestaurantsDesc;
+      document.getElementById("catRooftopsDesc").textContent = t.catRooftopsDesc;
+      document.getElementById("catActivitiesDesc").textContent = t.catActivitiesDesc;
+      document.getElementById("catBeachesDesc").textContent = t.catBeachesDesc;
+      document.querySelectorAll(".category-link").forEach(el => el.textContent = t.exploreLink);
+      document.getElementById("editorialLabel").textContent = t.editorialLabel;
+      document.getElementById("editorialTitle").textContent = t.editorialTitle;
+      document.getElementById("editorialCopy").textContent = t.editorialCopy;
+      document.getElementById("guideTag").textContent = t.guideTag;
+      document.getElementById("comparisonTag").textContent = t.comparisonTag;
+      document.getElementById("selectionTag").textContent = t.selectionTag;
+      document.getElementById("itineraryTag").textContent = t.itineraryTag;
+      document.getElementById("guideItemOne").textContent = t.guideItemOne;
+      document.getElementById("guideItemTwo").textContent = t.guideItemTwo;
+      document.getElementById("guideItemThree").textContent = t.guideItemThree;
+      document.getElementById("guideItemFour").textContent = t.guideItemFour;
+      document.getElementById("businessLabel").textContent = t.businessLabel;
+      document.getElementById("businessTitle").textContent = t.businessTitle;
+      document.getElementById("businessOneTitle").textContent = t.businessOneTitle;
+      document.getElementById("businessOneCopy").textContent = t.businessOneCopy;
+      document.getElementById("businessTwoTitle").textContent = t.businessTwoTitle;
+      document.getElementById("businessTwoCopy").textContent = t.businessTwoCopy;
+      document.getElementById("businessThreeTitle").textContent = t.businessThreeTitle;
+      document.getElementById("businessThreeCopy").textContent = t.businessThreeCopy;
+      document.getElementById("businessFourTitle").textContent = t.businessFourTitle;
+      document.getElementById("businessFourCopy").textContent = t.businessFourCopy;
+      document.getElementById("businessHighlight").textContent = t.businessHighlight;
+      document.getElementById("exploreLabel").textContent = t.exploreLabel;
+      document.getElementById("exploreTitle").textContent = t.exploreTitle;
+      document.getElementById("exploreCopy").textContent = t.exploreCopy;
+      document.getElementById("tabAll").textContent = t.tabAll;
+      document.getElementById("emptyState").textContent = t.emptyState;
+      document.getElementById("guidesLabel").textContent = t.guidesLabel;
+      document.getElementById("guidesTitle").textContent = t.guidesTitle;
+      document.getElementById("guidesCopy").textContent = t.guidesCopy;
+      document.getElementById("seoItineraryLabel").textContent = t.seoItineraryLabel;
+      document.getElementById("seoOneTitle").textContent = t.seoOneTitle;
+      document.getElementById("seoOneCopy").textContent = t.seoOneCopy;
+      document.getElementById("seoTwoTitle").textContent = t.seoTwoTitle;
+      document.getElementById("seoTwoCopy").textContent = t.seoTwoCopy;
+      document.getElementById("seoThreeTitle").textContent = t.seoThreeTitle;
+      document.getElementById("seoThreeCopy").textContent = t.seoThreeCopy;
+      document.getElementById("seoFourTitle").textContent = t.seoFourTitle;
+      document.getElementById("seoFourCopy").textContent = t.seoFourCopy;
+      document.getElementById("seoOneBtn").textContent = t.seeArticle;
+      document.getElementById("seoTwoBtn").textContent = t.seeArticle;
+      document.getElementById("seoThreeBtn").textContent = t.seeArticle;
+      document.getElementById("seoFourBtn").textContent = t.seeArticle;
+      document.getElementById("roadmapLabel").textContent = t.roadmapLabel;
+      document.getElementById("roadmapTitle").textContent = t.roadmapTitle;
+      document.getElementById("roadmapCopy").textContent = t.roadmapCopy;
+      document.getElementById("roadmapOneTitle").textContent = t.roadmapOneTitle;
+      document.getElementById("roadmapTwoTitle").textContent = t.roadmapTwoTitle;
+      document.getElementById("roadmapThreeTitle").textContent = t.roadmapThreeTitle;
+      setListItems("roadmapOneList", t.roadmapOneList);
+      setListItems("roadmapTwoList", t.roadmapTwoList);
+      setListItems("roadmapThreeList", t.roadmapThreeList);
+      document.getElementById("footerCtaTitle").textContent = t.footerCtaTitle;
+      document.getElementById("footerCtaCopy").textContent = t.footerCtaCopy;
+      document.getElementById("footerCtaOne").textContent = t.footerCtaOne;
+      document.getElementById("footerCtaTwo").textContent = t.footerCtaTwo;
+      document.getElementById("footerBrand").textContent = t.footerBrand;
+      document.getElementById("footerVersion").textContent = t.footerVersion;
+      document.getElementById("modalLoveLabel").textContent = t.modalLoveLabel;
+      document.getElementById("modalForLabel").textContent = t.modalForLabel;
+      document.getElementById("modalInfoLabel").textContent = t.modalInfoLabel;
+      document.getElementById("modalActionLabel").textContent = t.modalActionLabel;
+      document.getElementById("modalSecondaryCta").textContent = t.modalSecondaryCta;
+
+      document.querySelectorAll('#categorySelect option[data-i18n="all"], #citySelect option[data-i18n="all"]').forEach(opt => {
+        opt.textContent = t.allLabel;
+      });
+
+      renderPlaces();
+    }
+
     document.addEventListener("keydown", function(e){
       if (e.key === "Escape") forceCloseModal();
       if (e.key === "Enter" && document.activeElement.id === "searchInput") applyFilters();
     });
 
-    renderPlaces();
+    document.getElementById("searchInput").addEventListener("input", function(){
+      currentSearch = this.value.trim();
+      renderPlaces();
+    });
+
+    document.getElementById("categorySelect").addEventListener("change", function(){
+      currentCategory = this.value;
+      renderPlaces();
+    });
+
+    document.getElementById("citySelect").addEventListener("change", function(){
+      currentCity = this.value;
+      setActiveTab(document.querySelectorAll(".tab"), currentCity || translations[currentLang].tabAll);
+      renderPlaces();
+    });
+
+    setLanguage("fr");
   </script>
 </body>
 </html>
